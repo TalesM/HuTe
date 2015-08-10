@@ -1,0 +1,176 @@
+{
+	"suite": "Movi",
+	"pages": [
+		{
+			"target": "http://192.168.10.33/movi/carteira/vincular",
+			"tests": [
+				{
+					"conditions":[],
+					"procedures": [
+						"Escolher um cliente com EV livre",
+						"Clicar em Adicionar Oportunidade de Cadastro \"+\"",
+						"Preencher Campos e clicar em \"Ativar Oportunidade\""
+					],
+					"expected": "Vínculo criado com sucesso e redireciona para \"http://192.168.10.33/movi/oportunidade/ver/<Número>\""
+				}, 
+				{
+					"conditions":[],
+					"procedures": [
+						"Escolher um cliente com EV existente",
+						"Clicar em Adicionar Oportunidade de Cadastro \"+\"",
+						"Preencher Campos e clicar em \"Ativar Oportunidade\""
+					],
+					"expected": "Vínculo criado com sucesso e redireciona para \"http://192.17.20.33/movi/oportunidade/ver/<Número>\""
+				}
+			]
+		},
+		{
+			"target": "http://192.168.10.33/movi/",
+			"tests": [
+				{
+					"conditions": ["Escolher Oportunidade sem Followup"],
+					"procedures": [
+						"Clicar em Adicionar",
+						"Escolher *Qualquer* meio"
+					],
+					"expected": "Apenas Abertura ou Recontato devem aparecer como opção de ação"
+				}, 
+				{
+					"conditions": ["Escolher Oportunidade em Contato Inicial"],
+					"procedures": [
+						"Clicar em Adicionar",
+						"Escolher *Qualquer* meio"
+					],
+					"expected": "Apenas Negociação deve aparecer como opção de ação"
+				}, 
+				{
+					"conditions": ["Escolher Oportunidade sem Proposta"],
+					"procedures": [
+						"Clicar em Adicionar",
+						"Escolher *Qualquer* meio"
+					],
+					"expected": "Não deve ser possível fechar"
+				}, 
+				{
+					"conditions": ["Escolher Oportunidade Fechada"],
+					"procedures": [
+						"Clicar em Adicionar",
+						"Escolher *Qualquer* meio"
+					],
+					"expected": "Não deve ser possível negociar"
+				}, 
+				{
+					"conditions": [],
+					"procedures": [
+						"Clicar em Adicionar",
+						"Preencher Campos aleatóriamente",
+						"Escolher *Qualquer* campo e deixar vazio (exceto proposta ou arquivo)",
+						"Clicar Salvar Followup"
+					],
+					"expected": "Erro"
+				}, 
+				{
+					"conditions": [],
+					"procedures": [
+						"Clicar em Adicionar",
+						"Preencher Campos aleatóriamente",
+						"Preencher Arquivo",
+						"Clicar Salvar Followup"
+					],
+					"expected": "Salvar com sucesso e o arquivo deve ficar disponível para download na"
+				}
+			]
+		},
+		{
+			"target": "http://192.168.10.33/movi/proposta/listar/<Número>",
+			"comment": "Escolha algum a partir de http://192.168.10.33/movi/home ou crie a partir de http://192.168.10.33/movi/carteira/vincular e clique em \"Propostas\"",
+			"tests": [
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar em Verificar Viabilidade",
+						"Colocar CEP de um local atendido (Por Ex: \"94955-490\")",
+						"Preencher Todos os Campos e clicar em \"Próximo\"",
+						"Clicar em \"Analisar Viabilidade\""
+					],
+					"expected": "Aparecer a mensagem \"Sucesso! Há viabilidade automática para o endereço solicitado!\""
+				}, 
+				{
+					"conditions":["Oportunidade com pelo menos um Followup"],
+					"procedures": [
+						"Clicar em \"Adicionar Proposta\"",
+						"Clicar em \"Usar Lista de Preço\"",
+						"Preencher primeira página"
+					],
+					"expected": "Mensagem \"Adicionado com sucesso\", após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da \"lupa\" na viabilidade."
+				}, 
+				{
+					"conditions":["Oportunidade com ZERO Followups"],
+					"procedures": [
+						"Clicar em \"Adicionar Proposta\"",
+						"Clicar em \"Usar Lista de Preço\"",
+						"Preencher Campos da primeira página e clicar em \"Ok\""
+					],
+					"expected": "Mensagem de erro"
+				},
+				{
+					"conditions":["Oportunidade com pelo menos um Followup"],
+					"procedures": [
+						"Clicar em \"Adicionar Proposta\"",
+						"Clicar em \"Usar Lista de Preço\"",
+						"Preencher primeira página apenas parcialmente (testar para cada combinação de campos)"
+					],
+					"expected": "Erro de Validação"
+				},
+				{
+					"conditions":["Oportunidade com pelo menos um Followups"],
+					"procedures": [
+						"Clicar em \"Adicionar Proposta\"",
+						"Clicar em \"Usar Lista de Preço\"",
+						"Preencher primeira página",
+						"Preencher segunda página",
+						"Preencher terceira página"
+					],
+					"expected": "Mensagem \"Adicionado com sucesso\", após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da \"lupa\" na viabilidade."
+				},
+				{
+					"conditions":["Oportunidade com pelo menos um Followup"],
+					"procedures": [
+						"Clicar em \"Adicionar Proposta\"",
+						"Clicar em \"Usar Lista de Preço\"",
+						"Preencher primeira página",
+						"Preencher segunda página parcialmente para cada pessoa (http://simuladordecpf.com.br/ pode ajudar)"
+					],
+					"expected": "Erro de Validação"
+				},
+				{
+					"conditions":["Oportunidade com pelo menos um Followup"],
+					"procedures": [
+						"Clicar em \"Adicionar Proposta\"",
+						"Clicar em \"Usar Lista de Preço\"",
+						"Preencher primeira página",
+						"Preencher segunda página",
+						"Preencher terceira página parcialmente"
+					],
+					"expected": "Erro de Validação"
+				},
+				{
+					"conditions":["Oportunidade com pelo menos um Followup"],
+					"procedures": [
+						"Clicar em \"Visualizar Proposta\"",
+						"Clicar em \"Visualizar Arquivo\""
+					],
+					"expected": "Visualizar o PDF, deve baixar quase imediatamente"
+				},
+				{
+					"conditions":["Oportunidade com pelo menos um Followup"],
+					"procedures": [
+						"Clicar em \"Visualizar Proposta\"",
+						"Clicar em \"Gerar Novo Arquivo\""
+					],
+					"expected": "Visualizar o PDF, não deve ser tão rápido"
+				}
+			]
+		}
+	]
+}

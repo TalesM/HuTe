@@ -1,0 +1,31 @@
+<div class="test">
+	<div class="conditions">
+		<span class="field">Condições</span>
+		<ul>{{#conditions}}
+			<li> {{ . }} </li>
+		{{/conditions}}</ul>
+	</div>
+	<div class="procedures">
+		<span class="field">Procedimentos</span>
+		<ol>{{#procedures}}
+			<li>{{ . }}</li>
+		{{/procedures}}</ol>
+	</div>
+	<div class="expected">
+		<span class="field">Resultado Experado</span>
+		<span>{{{expected}}}</span>
+	</div>
+	<div class="result">
+		<span class="field">Resultado Obtido</span>
+		<span>
+			<label><input type="radio" name="result[{{target}}][{{index}}]" value="0">
+			Falhou</label>
+			<label><input type="radio" name="result[{{target}}][{{index}}]" value="1">
+			Passou</label>
+		</span>
+	</div>
+	<div class="comentarios">
+		<span class="field">Comentários</span>
+		<span><textarea name="test[{{target}}][{{index}}][result]" cols="80" rows="4"></textarea></span>
+	</div>
+</div>

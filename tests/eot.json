@@ -1,0 +1,127 @@
+{
+	"suite": "Eot",
+	"pages": [
+		{
+			"target": "http://192.168.10.33/voice/consumo/eotVersao",
+			"tests": [
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Lista de versões Vazia"
+					],
+					"procedures": [
+						"Selecionar um arquivo para importação",
+						"Clicar em \"Enviar Nova Versão\""
+					],
+					"expected": "arquivo enviado com sucesso e redireciona para \"http://192.168.10.33/voice/consumo/eot?<NúmeroVersão>\""
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Lista de versões Não Vazia",
+						"Existem EOTs com tarifa definida"
+					],
+					"procedures": [
+						"Selecionar um arquivo para importação",
+						"Clicar em \"Enviar Nova Versão\""
+					],
+					"expected": "arquivo enviado com sucesso e redireciona para \"http://192.168.10.33/voice/consumo/eot?<NúmeroVersão>\", com as tarifaz mantidas para cada eot"
+				}
+			]
+		},
+		{
+			"target": "http://192.168.10.33/voice/consumo/eot?id=<ID-Válido>",
+			"tests": [
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\""
+					],
+					"procedures": [
+						"Clicar no Botão \"Operadora\"",
+						"Selecionar alguma opção",
+						"Clicar \"OK\""
+					],
+					"expected": "A opção selecionada deve ser filtrada e o campo 'tarifa' torna-se um campo de texto"
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\""
+					],
+					"procedures": [
+						"Clicar no Botão \"Região\"",
+						"Selecionar alguma opção",
+						"Clicar \"OK\""
+					],
+					"expected": "A opção selecionada deve ser filtrada e o campo 'tarifa' torna-se um campo de texto"
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Tabela filtrada por 'Operadora' ou 'Região'"
+					],
+					"procedures": [
+						"Clicar no Botão \"Operadora\"",
+						"Clicar em \"Apagar\"",
+						"Clicar \"OK\"",
+						"Clicar no Botão \"Região\"",
+						"Clicar em \"Apagar\"",
+						"Clicar \"OK\""
+					],
+					"expected": "Os respectivos filtros são desfeitos e o campo 'tarifa' volta a ser somente texto"
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Tabela filtrada por 'Operadora' ou 'Região'",
+						"Há uma ou mais linhas na tabela",
+						"Está é versão mais recente das tarifas"
+					],
+					"procedures": [
+						"Alterar o valor do campo 'tarifa' de todas as linhas",
+						"Clicar em Enviar"
+					],
+					"expected": "Uma nova versão das eots é gerada, com os campos atualizados com os valores inputados"
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Tabela filtrada por 'Região', com uma Região 'X' e uma 'Y' selecionadas",
+						"Há uma ou mais linhas na tabela",
+						"Está é versão mais recente das tarifas"
+					],
+					"procedures": [
+						"Alterar o valor do campo 'tarifa' de todas as linhas",
+						"Alterar o valor da caixa de texto Região 'X'",
+						"Clicar em Enviar"
+					],
+					"expected": "Uma nova versão das eots é gerada, com todos os EOTs da Região 'X' terão valor submetido por você, mas as do tipo 'Y' não."
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Tabela filtrada por 'Operadora' ou 'Região'",
+						"Há uma ou mais linhas na tabela",
+						"Está NÃO é versão mais recente das tarifas"
+					],
+					"procedures": [
+						"Alterar o valor do campo 'tarifa' de todas as linhas",
+						"Clicar em Enviar"
+					],
+					"expected": "Deve ocorrer um erro informando que apenas não é permitido atualizar eot a partir de uma Versão antiga"
+				},
+				{
+					"conditions": [
+						"Com permissão \"[VOICE] - Tarifas\"",
+						"Tabela filtrada por 'Operadora' ou 'Região'",
+						"Há uma ou mais linhas na tabela"
+					],
+					"procedures": [
+						"Deixar uma tarifa em branco",
+						"Clicar em Enviar"
+					],
+					"expected": "Deve ocorrer um erro informando é necessário preencher todas as tarifas"
+				}
+			]
+		}
+	]
+}

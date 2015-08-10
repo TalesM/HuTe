@@ -1,0 +1,291 @@
+{
+	"suite": "Projetos",
+	"pages": [
+		{
+			"target": "http://192.168.10.33/engenharia/projeto/inserir",
+			"tests": [
+				{
+					"conditions": [
+						"Entrar via pendências",
+						"prazoSeparacao > hoje"
+					],
+					"procedures": [
+						"Clicar em Inserir"
+					],
+					"expected": "Projeto cadastrado com sucesso e Redireciona para tela listagem com o novo projeto marcado como separado e o circuito deve sumir das pendencias"
+				},
+				{
+					
+					"conditions": [
+						"Entrar via menu",
+						"tipo é pop",
+						"prazoSeparacao > hoje"
+					],
+					"procedures": [
+						"Escolher pop",
+						"Clicar em Inserir."
+					],
+					"expected": "Projeto cadastrado com sucesso e Redireciona para tela listagem com o novo projeto marcado como separado"
+				},
+				{
+					
+					"conditions": [
+						"Entrar via menu",
+						"tipo é circuito",
+						"prazoSeparacao > hoje"
+					],
+					"procedures": [
+						"Escolher cliente",
+						"Escolher circuito que não tenha '*' no nome",
+						"Clicar em Inserir."
+					],
+					"expected": "Projeto cadastrado com sucesso e Redireciona para tela listagem com o novo projeto marcado como separado"
+				},
+				{
+					
+					"conditions": [
+						"Entrar via menu",
+						"tipo é órfão",
+						"prazoSeparacao > hoje"
+					],
+					"procedures": [
+						"Clicar em Inserir."
+					],
+					"expected": "Projeto cadastrado com sucesso e Redireciona para tela listagem com o novo projeto marcado como separado."
+				},
+				{
+					
+					"conditions": [
+						"Entrar via menu",
+						"tipo é órfão",
+						"prazoSeparacao > hoje"
+					],
+					"procedures": [
+						"Escolher um ou mais produtos",
+						"Clicar em Inserir."
+					],
+					"expected": "Projeto cadastrado com sucesso e Redireciona para tela listagem com o novo projeto marcado como <b>Aguardando Separação</b>"
+				},
+				{
+					
+					"conditions": [
+						"prazoSeparacao < hoje"
+					],
+					"procedures": [
+						"Clicar  Inserir"
+					],
+					"expected": "Erro, pois não deve se pode pedir que um projeto seja instalado para ontem"
+				},
+				{
+					
+					"conditions": [
+						"tipo não selecionado"
+					],
+					"procedures": [
+						"Clicar em Inserir."
+					],
+					"expected": "Erro, pois um projeto precisa de tipo"
+				},
+				{
+					
+					"conditions": [
+						"Entrar via menu",
+						"tipo é pop",
+						"pop não selecionado"
+					],
+					"procedures": [
+						"Clicar em Inserir."
+					],
+					"expected": "Erro, pois é preciso selecionar algo."
+				},
+				{
+					
+					"conditions": [
+						"Entrar via menu",
+						"lista de produtos p/ rede externa não vazia",
+						"rede externa não preenchida"
+					],
+					"procedures": [
+						"Clicar em Inserir."
+					],
+					"expected": "Erro, pois é preciso selecionar rede externa."
+				}
+			]
+		},
+		{
+			"target": "http://192.168.10.33/engenharia/projeto/",
+			"tests": [
+				{
+					"conditions": [
+						"Projeto Aguardando Separação"
+					],
+					"procedures": [
+						"Clicar Em Detalhar",
+						"Clicar Editar"
+					],
+					"expected": "Os dados do projeto e todas as listas devem bater!"
+				},
+				{
+					"conditions": [
+						"Projeto Rejeitado"
+					],
+					"procedures": [
+						"Anotar a quantidade de produtos (via detalhar)",
+						"Clicar em Responder Rejeição",
+						"Clicar em Ignorar"
+					],
+					"expected": "O projeto deve voltar ao estado \"Aguardando Separação\", com as mesmas quantidades de itens."
+				},
+				{
+					"conditions": [
+						"Projeto Rejeitado"
+					],
+					"procedures": [
+						"Anotar a quantidade de produtos (via detalhar)",
+						"Clicar em Responder Rejeição",
+						"Anotar a quantidade a ser removida",
+						"Clicar em Remover Produtos"
+					],
+					"expected": "O projeto deve voltar ao estado \"Aguardando Separação\", com as mesmas quantidades de itens subtraída."
+				},
+				{
+					"conditions": [
+						"Projeto Rejeitado"
+					],
+					"procedures": [
+						"Anotar a quantidade de produtos (via detalhar)",
+						"Clicar em Responder Rejeição",
+						"Clicar em Cancelar Projeto"
+					],
+					"expected": "O projeto deve mudar para o estado \"Cancelado\"."
+				},
+				{
+					"conditions": [
+						"Projeto Separado"
+					],
+					"procedures": [
+						"Clicar em Finalizar"
+					],
+					"expected": "O projeto deve mudar para o estado \"Finalizado\"."
+				},
+				{
+					"conditions": [
+						"Projeto Separado ou Aguardando Separação"
+					],
+					"procedures": [
+						"Clicar em Cancelar"
+					],
+					"expected": "O projeto deve mudar para o estado \"Cancelado\"."
+				},
+				{
+					"conditions": [
+						"Projeto Criado via a página de pendências",
+						"Projeto Separado ou Aguardando Separação"
+					],
+					"procedures": [
+						"Clicar em Cancelar"
+					],
+					"expected": "O projeto deve mudar para o estado \"Cancelado\" e o circuito deve voltar às pendências."
+				},
+				{
+					"conditions":[
+						"Projeto Não Órfão",
+						"Pedido não contém item único com atributo.",
+						"Item não está no estoque do destino final."
+					],
+					"procedures": [
+						"Clicar em Finalizar"
+					],
+					"expected": "A ação deve resultar em erro, indicando a falta do item."
+				},
+				{
+					"conditions":[
+						"Projeto Não Órfão",
+						"Pedido contendo algum item único com atributo.",
+						"Item não está no estoque do destino final."
+					],
+					"procedures": [
+						"Clicar em Finalizar"
+					],
+					"expected": "A ação deve resultar em erro, indicando a falta do item."
+				},
+				{
+					"conditions":[
+						"Projeto Não Órfão",
+						"Pedido contendo algum item único com atributo.",
+						"Item está no estoque do destino final."
+					],
+					"procedures": [
+						"Clicar em Finalizar"
+					],
+					"expected": "A ação deve ser bem sucedida."
+				},
+				{
+					"conditions": [
+						"Haver projeto com 2 pedidos, sendo um deles aceito e outro com todos seus produtos rejeitados."
+					],
+					"procedures": [
+						"Clicar em Responder Rejeição",
+						"Clicar em Remover Produtos",
+						"Editar projeto",
+						"Remover o produto (que deve aparecer zerado)",
+						"Salvar"
+					],
+					"expected": "A ação deve ser bem sucedida e Projeto deve passar de 'Aguardando Separação' para 'Separado'."
+				}
+			]
+		},
+		{
+			"target": "http://192.168.10.33/luma/pedido/",
+			"tests": [
+				{
+					"conditions": [
+						"Pedido Aguardando Separação",
+						"Pedido com todos os produtos em estoque"
+					],
+					"procedures": [
+						"Clicar em Processar Pedido",
+						"Selecionar todos os produtos",
+						"Movimentar"
+					],
+					"expected": "A movimentação é um sucesso e o pedido some da lista."
+				},
+				{
+					"conditions": [
+						"Pedido Aguardando Separação",
+						"Pedido com alguns produtos em estoque"
+					],
+					"procedures": [
+						"Clicar em Processar Pedido",
+						"Selecionar alguns produtos e deixar outros não selecionados",
+						"Movimentar"
+					],
+					"expected": "A movimentação é um sucesso mas o pedido continua na lista, com os selecionados bloqueados."
+				},
+				{
+					"conditions": [
+						"Pedido Aguardando Separação",
+						"Pedido com alguns produtos em estoque"
+					],
+					"procedures": [
+						"Clicar em Processar Pedido",
+						"Selecionar um produto e deixar outros não selecionados",
+						"Movimentar"
+					],
+					"expected": "A movimentação é um sucesso mas o pedido continua na lista, com o produto selecionado sinalizando que certa quantidade já foi movimentada."
+				},
+				{
+					"conditions": [
+						"Pedido Aguardando Separação"
+					],
+					"procedures": [
+						"Clicar em Processar Pedido",
+						"Selecionar um ou mais produtos",
+						"Rejeitar"
+					],
+					"expected": "O status do pedido muda para rejeitado e nenhuma ação sobre ele é possível após isto."
+				}
+			]
+		}
+	]
+}
