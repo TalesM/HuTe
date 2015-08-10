@@ -1,0 +1,29 @@
+{
+  "name": "workflow projetos",
+  "version": "0.0.0",
+  "authors": [
+    "talesm <tales.miranda84@gmail.com>"
+  ],
+  "description": "Workflow",
+  "main": "config.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "homepage": "abaixonivel.wordpress.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mustache": "~2.0.0",
+    "requirejs-json": "~0.0.3",
+    "requirejs-domready": "~2.0.1",
+    "requirejs": "~2.1.17",
+    "requirejs-mustache": "https://github.com/TalesM/requirejs-mustache.git",
+    "d3": "~3.5.5"
+  }
+}

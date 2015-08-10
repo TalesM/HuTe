@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testes</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<meta charset="latin1">
+	<style>
+		body{counter-reset: page;}
+		.page h2::before{counter-increment: page; content: "#"counter(page)") ";}
+		.page{counter-reset: test;}
+		.test::before{counter-increment: test; content: "Teste "counter(page)"."counter(test);font-size: 14pt;font-weight: bold;}
+		.test{display: table; margin-bottom: 1em; width: 50em;}
+		.test > div{display: table-row;}
+		.test > div > *{display: table-cell; border-top: 1px solid gray; border-left: 1px solid gray;}
+		.test > div:nth-child(1) > *{border-top: 2px solid black;}
+		.test > div:nth-child(2n+1) > *{background: #eee;}
+		.test > div:nth-last-child(1) > *{border-bottom: 2px solid black;}
+		.test > div > span:nth-child(1){width: 10em; text-align: right; padding-right: .5em; border-left: 0;}
+		.field{vertical-align: top;}
+ 	</style>
+</head>
+<body>
+<h1>Testes</h1>
+<form class="output" action="../result/projeto.php" method="post">	
+	<a class="pure-button pure-button-primary jCsv">Exportar CSV</a>
+	<div class="page">{{#pages}}
+		<h2>Página Alvo: <a target="blank" href="{{target}}">{{target}}</a></h2>{{#comment}}
+		<div>
+			{{comment}}
+		</div>
+		{{/comment}}<div>{{#tests}}{{>wtestCase}}{{/tests}}</div>
+		<hr/>
+	{{/pages}}</div>
+	<a class="pure-button pure-button-primary jCsv">Exportar CSV</a>
+</form>
+<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="papaparse.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('.jCsv').click(function(event) {
+		var acc = [['Condições', 'Procedimentos', 'Resultado Experado', 'Resultado Obtido', 'Comentários']];
+		$('.output .test').each(function(index, elem) {
+			var $elem = $(elem);
+			var obtido = $elem.find('input:checked').val();
+			if(obtido === '1' ){
+				obtido = 'Passou';
+			} else if(obtido === '0' ){
+				obtido = 'Falhou';
+			} else {
+				obtido = '';
+			}
+			acc.push([$elem.find('.conditions li').toArray()
+					.map(function(element){return element.textContent.trim();})
+					.join('; ')+'.',
+				$elem.find('.procedures li').toArray()
+					.map(function(element){return element.textContent.trim();})
+					.join('; ')+'.',
+				$elem.find('.expected :not(.field)').text(),
+				obtido,
+				$elem.find('textarea').val()]);
+
+		});
+		var csv = Papa.unparse(acc, {delimiter: ';'});
+		console.log(csv);
+		this.download 	= 'hi.csv';
+		this.href 		= 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv);//text/csv
+		setTimeout(function(){
+			this.href = 'about:blank';
+		}.bind(this), 100);
+	});
+});
+</script>
+</body>
+</html>
