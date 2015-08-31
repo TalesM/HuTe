@@ -3,7 +3,13 @@
 <head>
 	<title>Testes</title>
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-	<meta charset="latin1">
+	<script src="bower_components/requirejs/require.js" type="text/javascript" charset="utf-8"></script>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		require(['config'], function(config) {
+			require(['tests']);
+		});
+	</script>
 	<style>
 		body{counter-reset: page;}
 		.page h2::before{counter-increment: page; content: "#"counter(page)") ";}
@@ -22,53 +28,45 @@
 <body>
 <h1>Testes</h1>
 <form class="output" action="../result/projeto.php" method="post">	
-	<a class="pure-button pure-button-primary jCsv">Exportar CSV</a>
 	<div class="page">{{#pages}}
-		<h2>Página Alvo: <a target="blank" href="{{target}}">{{target}}</a></h2>{{#comment}}
-		<div>
-			{{comment}}
+		<h2>Página Alvo: <a target="blank" href="{{target}}">{{target}}</a></h2>
+		<div>{{#tests}}
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>{{#conditions}}
+						<li> {{ . }} </li>
+					{{/conditions}}</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>{{#procedures}}
+						<li>{{ . }}</li>
+					{{/procedures}}</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>{{{expected}}}</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[{{target}}][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[{{target}}][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[{{target}}][{{expected}}][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+			{{/tests}}
 		</div>
-		{{/comment}}<div>{{#tests}}{{>wtestCase}}{{/tests}}</div>
 		<hr/>
 	{{/pages}}</div>
-	<a class="pure-button pure-button-primary jCsv">Exportar CSV</a>
+	<input type="submit" class="pure-button pure-button-primary">
 </form>
-<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="papaparse.js"></script>
-<script type="text/javascript">
-$(function() {
-	$('.jCsv').click(function(event) {
-		var acc = [['Condições', 'Procedimentos', 'Resultado Experado', 'Resultado Obtido', 'Comentários']];
-		$('.output .test').each(function(index, elem) {
-			var $elem = $(elem);
-			var obtido = $elem.find('input:checked').val();
-			if(obtido === '1' ){
-				obtido = 'Passou';
-			} else if(obtido === '0' ){
-				obtido = 'Falhou';
-			} else {
-				obtido = '';
-			}
-			acc.push([$elem.find('.conditions li').toArray()
-					.map(function(element){return element.textContent.trim();})
-					.join('; ')+'.',
-				$elem.find('.procedures li').toArray()
-					.map(function(element){return element.textContent.trim();})
-					.join('; ')+'.',
-				$elem.find('.expected :not(.field)').text(),
-				obtido,
-				$elem.find('textarea').val()]);
-
-		});
-		var csv = Papa.unparse(acc, {delimiter: ';'});
-		console.log(csv);
-		this.download 	= 'hi.csv';
-		this.href 		= 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv);//text/csv
-		setTimeout(function(){
-			this.href = 'about:blank';
-		}.bind(this), 100);
-	});
-});
-</script>
 </body>
 </html>
