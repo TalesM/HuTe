@@ -96,6 +96,26 @@
 					"expected": "Aparecer a mensagem \"Sucesso! Há viabilidade automática para o endereço solicitado!\""
 				}, 
 				{
+					"conditions":[],
+					"procedures": [
+						"Clicar em Verificar Viabilidade",
+						"Colocar CEP de um local atendido (Por Ex: \"94955-490\")",
+						"Preencher Todos os Campos, colocando uma velocidade absurda (algo como 1000 GB) e clicar em \"Próximo\"",
+						"Clicar em \"Analisar Viabilidade\""
+					],
+					"expected": "Aparecer a mensagem \"Erro! não há viabilidade para a velocidade selecionada, mas há para velocidades menores!\""
+				}, 
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar em Verificar Viabilidade",
+						"Colocar CEP de um local não atendido (Por Ex: \"91530-360\")",
+						"Preencher Todos os Campos e clicar em \"Próximo\"",
+						"Clicar em \"Analisar Viabilidade\""
+					],
+					"expected": "Aparecer a mensagem \"Erro! Não Há viabilidade automática para o endereço solicitado!\" e ao salvar esta fica com um status vermelho."
+				}, 
+				{
 					"conditions":["Oportunidade com pelo menos um Followup"],
 					"procedures": [
 						"Clicar em \"Adicionar Proposta\"",
@@ -171,6 +191,6 @@
 					"expected": "Visualizar o PDF, não deve ser tão rápido"
 				}
 			]
-		}
+		},
 	]
 }

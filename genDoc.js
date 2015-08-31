@@ -6,6 +6,7 @@ var input = 'movi.json';
 var template = 'teste';
 var output = 'gen/roteiroTests.html';
 require(['json!tests/'+input, 'stache!'+template], function(inputJson, template) {
+	console.log('Starting!');
 	inputJson.pages.forEach(function(elem) {
 		var j = 1;
 		elem.tests.forEach(function(test){
@@ -13,7 +14,7 @@ require(['json!tests/'+input, 'stache!'+template], function(inputJson, template)
 		});
 	})
 	var outputHtml = template(inputJson);
-	fs.writeFile(output, outputHtml, {encoding: 'ascii'}, function(err) {
+	fs.writeFile(output, outputHtml, {}, function(err) {
 		if (err) throw err;
 		console.log('It\'s saved!');
 	});

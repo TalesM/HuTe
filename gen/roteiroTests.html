@@ -3,7 +3,13 @@
 <head>
 	<title>Testes</title>
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-	<meta charset="latin1">
+	<script src="bower_components/requirejs/require.js" type="text/javascript" charset="utf-8"></script>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		require(['config'], function(config) {
+			require(['tests']);
+		});
+	</script>
 	<style>
 		body{counter-reset: page;}
 		.page h2::before{counter-increment: page; content: "#"counter(page)") ";}
@@ -22,12 +28,12 @@
 <body>
 <h1>Testes</h1>
 <form class="output" action="../result/projeto.php" method="post">	
-	<a class="pure-button pure-button-primary jCsv">Exportar CSV</a>
 	<div class="page">
-		<h2>P�gina Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular">http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular</a></h2><div>
+		<h2>Página Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular">http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular</a></h2>
+		<div>
 			<div class="test">
 				<div class="conditions">
-					<span class="field">Condi��es</span>
+					<span class="field">Condições</span>
 					<ul></ul>
 				</div>
 				<div class="procedures">
@@ -42,26 +48,26 @@
 				</div>
 				<div class="expected">
 					<span class="field">Resultado Experado</span>
-					<span>V�nculo criado com sucesso e redireciona para "http://192.168.10.33/movi/oportunidade/ver/<N�mero>"</span>
+					<span>Vínculo criado com sucesso e redireciona para "http://192.168.10.33/movi/oportunidade/ver/<Número>"</span>
 				</div>
 				<div class="result">
 					<span class="field">Resultado Obtido</span>
 					<span>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][1]" value="0">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][]" value="0">
 						Falhou</label>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][1]" value="1">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][]" value="1">
 						Passou</label>
 					</span>
 				</div>
 				<div class="comentarios">
-					<span class="field">Coment�rios</span>
-					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][1][result]" cols="80" rows="4"></textarea></span>
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][Vínculo criado com sucesso e redireciona para &quot;http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;oportunidade&#x2F;ver&#x2F;&lt;Número&gt;&quot;][result]"cols="80" rows="4"></textarea></span>
 				</div>
 			</div>
 
 			<div class="test">
 				<div class="conditions">
-					<span class="field">Condi��es</span>
+					<span class="field">Condições</span>
 					<ul></ul>
 				</div>
 				<div class="procedures">
@@ -76,33 +82,242 @@
 				</div>
 				<div class="expected">
 					<span class="field">Resultado Experado</span>
-					<span>V�nculo criado com sucesso e redireciona para "http://192.17.20.33/movi/oportunidade/ver/<N�mero>"</span>
+					<span>Vínculo criado com sucesso e redireciona para "http://192.17.20.33/movi/oportunidade/ver/<Número>"</span>
 				</div>
 				<div class="result">
 					<span class="field">Resultado Obtido</span>
 					<span>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][2]" value="0">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][]" value="0">
 						Falhou</label>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][2]" value="1">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][]" value="1">
 						Passou</label>
 					</span>
 				</div>
 				<div class="comentarios">
-					<span class="field">Coment�rios</span>
-					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][2][result]" cols="80" rows="4"></textarea></span>
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular][Vínculo criado com sucesso e redireciona para &quot;http:&#x2F;&#x2F;192.17.20.33&#x2F;movi&#x2F;oportunidade&#x2F;ver&#x2F;&lt;Número&gt;&quot;][result]"cols="80" rows="4"></textarea></span>
 				</div>
 			</div>
 		</div>
 		<hr/>
 	
-		<h2>P�gina Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;">http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;</a></h2>
-		<div>
-			Escolha algum a partir de http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;home ou crie a partir de http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular e clique em &quot;Propostas&quot;
-		</div>
+		<h2>Página Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;">http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;</a></h2>
 		<div>
 			<div class="test">
 				<div class="conditions">
-					<span class="field">Condi��es</span>
+					<span class="field">Condições</span>
+					<ul>
+						<li> Escolher Oportunidade sem Followup </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Adicionar</li>
+					
+						<li>Escolher *Qualquer* meio</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Apenas Abertura ou Recontato devem aparecer como opção de ação</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][Apenas Abertura ou Recontato devem aparecer como opção de ação][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Escolher Oportunidade em Contato Inicial </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Adicionar</li>
+					
+						<li>Escolher *Qualquer* meio</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Apenas Negociação deve aparecer como opção de ação</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][Apenas Negociação deve aparecer como opção de ação][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Escolher Oportunidade sem Proposta </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Adicionar</li>
+					
+						<li>Escolher *Qualquer* meio</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Não deve ser possível fechar</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][Não deve ser possível fechar][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Escolher Oportunidade Fechada </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Adicionar</li>
+					
+						<li>Escolher *Qualquer* meio</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Não deve ser possível negociar</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][Não deve ser possível negociar][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Adicionar</li>
+					
+						<li>Preencher Campos aleatóriamente</li>
+					
+						<li>Escolher *Qualquer* campo e deixar vazio (exceto proposta ou arquivo)</li>
+					
+						<li>Clicar Salvar Followup</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Erro</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][Erro][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Adicionar</li>
+					
+						<li>Preencher Campos aleatóriamente</li>
+					
+						<li>Preencher Arquivo</li>
+					
+						<li>Clicar Salvar Followup</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Salvar com sucesso e o arquivo deve ficar disponível para download na</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;][Salvar com sucesso e o arquivo deve ficar disponível para download na][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+		</div>
+		<hr/>
+	
+		<h2>Página Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;">http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;</a></h2>
+		<div>
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
 					<ul></ul>
 				</div>
 				<div class="procedures">
@@ -112,35 +327,107 @@
 					
 						<li>Colocar CEP de um local atendido (Por Ex: &quot;94955-490&quot;)</li>
 					
-						<li>Preencher Todos os Campos e clicar em &quot;Pr�ximo&quot;</li>
+						<li>Preencher Todos os Campos e clicar em &quot;Próximo&quot;</li>
 					
 						<li>Clicar em &quot;Analisar Viabilidade&quot;</li>
 					</ol>
 				</div>
 				<div class="expected">
 					<span class="field">Resultado Experado</span>
-					<span>Aparecer a mensagem "Sucesso! H� viabilidade autom�tica para o endere�o solicitado!"</span>
+					<span>Aparecer a mensagem "Sucesso! Há viabilidade automática para o endereço solicitado!"</span>
 				</div>
 				<div class="result">
 					<span class="field">Resultado Obtido</span>
 					<span>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][1]" value="0">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
 						Falhou</label>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][1]" value="1">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
 						Passou</label>
 					</span>
 				</div>
 				<div class="comentarios">
-					<span class="field">Coment�rios</span>
-					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][1][result]" cols="80" rows="4"></textarea></span>
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Aparecer a mensagem &quot;Sucesso! Há viabilidade automática para o endereço solicitado!&quot;][result]"cols="80" rows="4"></textarea></span>
 				</div>
 			</div>
 
 			<div class="test">
 				<div class="conditions">
-					<span class="field">Condi��es</span>
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Verificar Viabilidade</li>
+					
+						<li>Colocar CEP de um local atendido (Por Ex: &quot;94955-490&quot;)</li>
+					
+						<li>Preencher Todos os Campos, colocando uma velocidade absurda (algo como 1000 GB) e clicar em &quot;Próximo&quot;</li>
+					
+						<li>Clicar em &quot;Analisar Viabilidade&quot;</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Aparecer a mensagem "Erro! não há viabilidade para a velocidade selecionada, mas há para velocidades menores!"</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Aparecer a mensagem &quot;Erro! não há viabilidade para a velocidade selecionada, mas há para velocidades menores!&quot;][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em Verificar Viabilidade</li>
+					
+						<li>Colocar CEP de um local não atendido (Por Ex: &quot;91530-360&quot;)</li>
+					
+						<li>Preencher Todos os Campos e clicar em &quot;Próximo&quot;</li>
+					
+						<li>Clicar em &quot;Analisar Viabilidade&quot;</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Aparecer a mensagem "Erro! Não Há viabilidade automática para o endereço solicitado!" e ao salvar esta fica com um status vermelho.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Aparecer a mensagem &quot;Erro! Não Há viabilidade automática para o endereço solicitado!&quot; e ao salvar esta fica com um status vermelho.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
 					<ul>
-						<li> Oportunidade com pelo menos um Followups </li>
+						<li> Oportunidade com pelo menos um Followup </li>
 					</ul>
 				</div>
 				<div class="procedures">
@@ -148,33 +435,33 @@
 					<ol>
 						<li>Clicar em &quot;Adicionar Proposta&quot;</li>
 					
-						<li>Clicar em &quot;Usar Lista de Pre�o&quot;</li>
+						<li>Clicar em &quot;Usar Lista de Preço&quot;</li>
 					
-						<li>Mensagem &quot;Adicionado com sucesso&quot;, ap�s isso aparece o arquivo proposta####.odt para download e ele se torna vis�vel a partir da &quot;lupa&quot; na viabilidade.</li>
+						<li>Preencher primeira página</li>
 					</ol>
 				</div>
 				<div class="expected">
 					<span class="field">Resultado Experado</span>
-					<span>.</span>
+					<span>Mensagem "Adicionado com sucesso", após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da "lupa" na viabilidade.</span>
 				</div>
 				<div class="result">
 					<span class="field">Resultado Obtido</span>
 					<span>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][2]" value="0">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
 						Falhou</label>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][2]" value="1">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
 						Passou</label>
 					</span>
 				</div>
 				<div class="comentarios">
-					<span class="field">Coment�rios</span>
-					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][2][result]" cols="80" rows="4"></textarea></span>
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Mensagem &quot;Adicionado com sucesso&quot;, após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da &quot;lupa&quot; na viabilidade.][result]"cols="80" rows="4"></textarea></span>
 				</div>
 			</div>
 
 			<div class="test">
 				<div class="conditions">
-					<span class="field">Condi��es</span>
+					<span class="field">Condições</span>
 					<ul>
 						<li> Oportunidade com ZERO Followups </li>
 					</ul>
@@ -184,9 +471,9 @@
 					<ol>
 						<li>Clicar em &quot;Adicionar Proposta&quot;</li>
 					
-						<li>Clicar em &quot;Usar Lista de Pre�o&quot;</li>
+						<li>Clicar em &quot;Usar Lista de Preço&quot;</li>
 					
-						<li>Preencher Campos da primeira p�gina e clicar em &quot;Ok&quot;</li>
+						<li>Preencher Campos da primeira página e clicar em &quot;Ok&quot;</li>
 					</ol>
 				</div>
 				<div class="expected">
@@ -196,58 +483,243 @@
 				<div class="result">
 					<span class="field">Resultado Obtido</span>
 					<span>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][3]" value="0">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
 						Falhou</label>
-						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][3]" value="1">
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
 						Passou</label>
 					</span>
 				</div>
 				<div class="comentarios">
-					<span class="field">Coment�rios</span>
-					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;N�mero&gt;][3][result]" cols="80" rows="4"></textarea></span>
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Mensagem de erro][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Oportunidade com pelo menos um Followup </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em &quot;Adicionar Proposta&quot;</li>
+					
+						<li>Clicar em &quot;Usar Lista de Preço&quot;</li>
+					
+						<li>Preencher primeira página apenas parcialmente (testar para cada combinação de campos)</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Erro de Validação</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Erro de Validação][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Oportunidade com pelo menos um Followups </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em &quot;Adicionar Proposta&quot;</li>
+					
+						<li>Clicar em &quot;Usar Lista de Preço&quot;</li>
+					
+						<li>Preencher primeira página</li>
+					
+						<li>Preencher segunda página</li>
+					
+						<li>Preencher terceira página</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Mensagem "Adicionado com sucesso", após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da "lupa" na viabilidade.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Mensagem &quot;Adicionado com sucesso&quot;, após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da &quot;lupa&quot; na viabilidade.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Oportunidade com pelo menos um Followup </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em &quot;Adicionar Proposta&quot;</li>
+					
+						<li>Clicar em &quot;Usar Lista de Preço&quot;</li>
+					
+						<li>Preencher primeira página</li>
+					
+						<li>Preencher segunda página parcialmente para cada pessoa (http:&#x2F;&#x2F;simuladordecpf.com.br&#x2F; pode ajudar)</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Erro de Validação</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Erro de Validação][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Oportunidade com pelo menos um Followup </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em &quot;Adicionar Proposta&quot;</li>
+					
+						<li>Clicar em &quot;Usar Lista de Preço&quot;</li>
+					
+						<li>Preencher primeira página</li>
+					
+						<li>Preencher segunda página</li>
+					
+						<li>Preencher terceira página parcialmente</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Erro de Validação</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Erro de Validação][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Oportunidade com pelo menos um Followup </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em &quot;Visualizar Proposta&quot;</li>
+					
+						<li>Clicar em &quot;Visualizar Arquivo&quot;</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Visualizar o PDF, deve baixar quase imediatamente</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Visualizar o PDF, deve baixar quase imediatamente][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul>
+						<li> Oportunidade com pelo menos um Followup </li>
+					</ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar em &quot;Visualizar Proposta&quot;</li>
+					
+						<li>Clicar em &quot;Gerar Novo Arquivo&quot;</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Visualizar o PDF, não deve ser tão rápido</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Visualizar o PDF, não deve ser tão rápido][result]"cols="80" rows="4"></textarea></span>
 				</div>
 			</div>
 		</div>
 		<hr/>
 	</div>
-	<a class="pure-button pure-button-primary jCsv">Exportar CSV</a>
+	<input type="submit" class="pure-button pure-button-primary">
 </form>
-<script type="text/javascript" src="jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="papaparse.js"></script>
-<script type="text/javascript">
-$(function() {
-	$('.jCsv').click(function(event) {
-		var acc = [['Condi��es', 'Procedimentos', 'Resultado Experado', 'Resultado Obtido', 'Coment�rios']];
-		$('.output .test').each(function(index, elem) {
-			var $elem = $(elem);
-			var obtido = $elem.find('input:checked').val();
-			if(obtido === '1' ){
-				obtido = 'Passou';
-			} else if(obtido === '0' ){
-				obtido = 'Falhou';
-			} else {
-				obtido = '';
-			}
-			acc.push([$elem.find('.conditions li').toArray()
-					.map(function(element){return element.textContent.trim();})
-					.join('; ')+'.',
-				$elem.find('.procedures li').toArray()
-					.map(function(element){return element.textContent.trim();})
-					.join('; ')+'.',
-				$elem.find('.expected :not(.field)').text(),
-				obtido,
-				$elem.find('textarea').val()]);
-
-		});
-		var csv = Papa.unparse(acc, {delimiter: ';'});
-		console.log(csv);
-		this.download 	= 'hi.csv';
-		this.href 		= 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv);//text/csv
-		setTimeout(function(){
-			this.href = 'about:blank';
-		}.bind(this), 100);
-	});
-});
-</script>
 </body>
 </html>
