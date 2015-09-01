@@ -11,7 +11,7 @@
 	
 	.attr label {vertical-align: top; padding-right: .5em;}
 	body{counter-reset: page;}
-	.test {border: 1px dotted black;}
+	.test {border-bottom: 3px double black;margin-bottom: .5em;}
 	.test > div {display: inline-block;}
 	</style>
 </head>
@@ -22,6 +22,7 @@
 		<hr>
 	</div>
 	<button class="jAddpage pure-button pure-button-primary">Adicionar P&aacute;gina</button>
+	<button class="jExportJSON pure-button">Exportar JSON</button>
 
 	<script src="bower_components/requirejs/require.js"></script>
 	<script src="gen/jquery-2.1.4.min.js"></script>
@@ -45,6 +46,30 @@
 				require(['stache!test'], function (test) {
 					$tests.append(test({id: $tests.find('.test').length}));
 				});
+			});
+			$('.jExportJSON').click(function() {
+				var suite = {
+					suite: $('#suite').val(),
+					pages:$('.page').map(function(ind, page) {
+						var $page = $(this);
+						return {
+							target: $page.find('.target').val(),
+							comment: $page.find('.comment').val(),
+							tests: $page.find('.test').map(function(ind, test) {
+								var $test = $(this);
+								var conditions = $test.find('.conditions').val() || '';
+								var procedures = $test.find('.procedures').val() || '';
+								var expected = $test.find('.expected').val() || '';
+								return {
+									conditions: conditions.split('\n\n'),
+									procedures: procedures.split('\n\n'),
+									expected: expected
+								};
+							}).get(),
+						};
+					}).get(),
+				};
+				console.log(suite);
 			});
 		});
 	</script>
