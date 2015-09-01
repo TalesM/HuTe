@@ -13,6 +13,30 @@
 	body{counter-reset: page;}
 	.test {border-bottom: 3px double black;margin-bottom: .5em;}
 	.test > div {display: inline-block;}
+
+    .button-success,
+    .button-error,
+    .button-warning,
+    .button-secondary {
+        color: white;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-success {
+        background: rgb(28, 184, 65); /* this is a green */
+    }
+
+    .button-error {
+        background: rgb(202, 60, 60); /* this is a maroon */
+    }
+
+    .button-warning {
+        background: rgb(223, 117, 20); /* this is an orange */
+    }
+
+    .button-secondary {
+        background: rgb(66, 184, 221); /* this is a light blue */
+    }
 	</style>
 </head>
 <body>
@@ -22,7 +46,11 @@
 		<hr>
 	</div>
 	<button class="jAddpage pure-button pure-button-primary">Adicionar P&aacute;gina</button>
-	<button class="jExportJSON pure-button">Exportar JSON</button>
+	<a class="jExportJSON pure-button">Exportar JSON</a>
+	<button class="jImportJSON pure-button button-warning">Importar JSON</button>
+	<button class="jClear pure-button button-error">Limpar</button>
+	<br/>
+	<input type="file" id="fileInput" accept="application/json" hidden>
 
 	<script src="bower_components/requirejs/require.js"></script>
 	<script src="gen/jquery-2.1.4.min.js"></script>
@@ -48,7 +76,24 @@
 				});
 			});
 			$('.jExportJSON').click(function() {
-				var suite = {
+				var suite = exportObject();
+				console.log(suite);
+				this.download = 'test'+suite.suite+new Date().toISOString()+'.json';
+				this.href = 'data:application/JSON;text,'+JSON.stringify(suite);
+			});
+			$('.jImportJSON').click(function() {
+				if(!confirm('Deseja mesmo importar? Isto vai eliminar todas as informacoes atuais')){
+					return;
+				}
+				$('#fileInput').click();
+			});
+			$('.jClear').click(function() {
+				if(!confirm('Deseja mesmo eliminar todas as informacoes atuais?')){
+					return;
+				}
+			});
+			function exportObject(){
+				return {
 					suite: $('#suite').val(),
 					pages:$('.page').map(function(ind, page) {
 						var $page = $(this);
@@ -69,8 +114,11 @@
 						};
 					}).get(),
 				};
-				console.log(suite);
-			});
+			}
+			function clear(){
+				$('#pages > div').remove();
+				$('#suite').val('');
+			}
 		});
 	</script>
 </body>
