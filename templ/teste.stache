@@ -14,6 +14,8 @@
 		body{counter-reset: page;}
 		.page h2::before{counter-increment: page; content: "#"counter(page)") ";}
 		.page{counter-reset: test;}
+		.comment{width: 50em;}
+		.comment::before{content: 'Comentário:'; font-weight: bold;}
 		.test::before{counter-increment: test; content: "Teste "counter(page)"."counter(test);font-size: 14pt;font-weight: bold;}
 		.test{display: table; margin-bottom: 1em; width: 50em;}
 		.test > div{display: table-row;}
@@ -30,6 +32,11 @@
 <form class="output" action="../result/projeto.php" method="post">	
 	<div class="page">{{#pages}}
 		<h2>Página Alvo: <a target="blank" href="{{target}}">{{target}}</a></h2>
+		{{# comment }}
+		<div class="comment">
+			{{comment}}
+		</div>
+		{{/ comment }}
 		<div>{{#tests}}
 			<div class="test">
 				<div class="conditions">

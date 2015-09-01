@@ -14,6 +14,8 @@
 		body{counter-reset: page;}
 		.page h2::before{counter-increment: page; content: "#"counter(page)") ";}
 		.page{counter-reset: test;}
+		.comment{width: 50em;}
+		.comment::before{content: 'Comentário:'; font-weight: bold;}
 		.test::before{counter-increment: test; content: "Teste "counter(page)"."counter(test);font-size: 14pt;font-weight: bold;}
 		.test{display: table; margin-bottom: 1em; width: 50em;}
 		.test > div{display: table-row;}
@@ -314,6 +316,9 @@
 		<hr/>
 	
 		<h2>Página Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;">http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;</a></h2>
+		<div class="comment">
+			Escolha algum a partir de http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;home ou crie a partir de http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;carteira&#x2F;vincular e clique em &quot;Propostas&quot;
+		</div>
 		<div>
 			<div class="test">
 				<div class="conditions">
@@ -714,6 +719,410 @@
 				<div class="comentarios">
 					<span class="field">Comentários</span>
 					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;movi&#x2F;proposta&#x2F;listar&#x2F;&lt;Número&gt;][Visualizar o PDF, não deve ser tão rápido][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+		</div>
+		<hr/>
+	
+		<h2>Página Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias">http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias</a></h2>
+		<div class="comment">
+			Tenha permissão &#39;[ENGENHARIA] Viabilidade&#39; e &#39;[ENGENHARIA Responder Solicitação de Viabilidade&#39; total. Para criar pendencias novas use o Análisar viabilidade do teste anterior
+		</div>
+		<div>
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Preencher Observações</li>
+					
+						<li>Clicar em enviar análise</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status Aguardando Análise Prevendas)</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status Aguardando Análise Prevendas)][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Deixar Observações vazias</li>
+					
+						<li>Clicar em enviar análise</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Erro</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][Erro][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Clicar em Adicionar Produto</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Permite Escolher um produto e quantidade. Ambos são salváveis</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][Permite Escolher um produto e quantidade. Ambos são salváveis][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Clicar em Adicionar Produto</li>
+					
+						<li>Clicar em &#39;+&#39;</li>
+					
+						<li>Escolher ID Luma ou Outro Produto</li>
+					
+						<li>Escolher um produto que não está na lista</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>O produto deve aparecer na lista e podem ser editados/salvos</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][O produto deve aparecer na lista e podem ser editados&#x2F;salvos][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Clicar em Adicionar Grupo</li>
+					
+						<li>Escolher um grupo Qualquer</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>O grupo deve aparecer com vários produtos, cada qual com quantidades pré-determinadas. As quantidades são editáveis, mas os produtos não o são.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][O grupo deve aparecer com vários produtos, cada qual com quantidades pré-determinadas. As quantidades são editáveis, mas os produtos não o são.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Preencher as variações possíveis de paramêtros</li>
+					
+						<li>Clicar &#39;Enviar Análise&#39;</li>
+					
+						<li>Ao voltar para a tela, clicar em filtrar por &#39;Aguardando Análise Engenharia&#39;</li>
+					
+						<li>Clicar em visualizar a proposta que acabaste de gerar</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Os dados devem bater.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][Os dados devem bater.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Analisar Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise de Engenharia&#39;</li>
+					
+						<li>Preencher as variações possíveis de paramêtros</li>
+					
+						<li>Clicar no Desenhar Linha (no mapa) e desenhe uma linha</li>
+					
+						<li>Clicar &#39;Enviar Análise&#39;</li>
+					
+						<li>Ao voltar para a tela, clicar em filtrar por &#39;Aguardando Análise Engenharia&#39;</li>
+					
+						<li>Clicar em visualizar a proposta que acabaste de gerar</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Os dados devem bater, e o mapa também.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;engenharia&#x2F;viabilidade&#x2F;pendencias][Os dados devem bater, e o mapa também.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+		</div>
+		<hr/>
+	
+		<h2>Página Alvo: <a target="blank" href="http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar">http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar</a></h2>
+		<div class="comment">
+			Tenha permissão &#39;[PREVENDA] Admin&#39; total. Para criar pendencias novas use o Análisar viabilidade do teste anterior
+		</div>
+		<div>
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Detalhar Pedido de Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise Prevendas&#39;</li>
+					
+						<li>Clicar em enviar &#39;Inviável&#39;</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Inviável por motivos Prevendas')</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status &#39;Inviável por motivos Prevendas&#39;)][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Detalhar Pedido de Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise Prevendas&#39;</li>
+					
+						<li>Clicar em enviar &#39;Vincular Lpu&#39;</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Viabilidade Aprovada') e o usuário pode criar uma proposta com esta viabilidade.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status &#39;Viabilidade Aprovada&#39;) e o usuário pode criar uma proposta com esta viabilidade.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Detalhar Pedido de Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise Prevendas&#39;</li>
+					
+						<li>Clicar em enviar &#39;Adicionar Lpu&#39;</li>
+					
+						<li>Preencher campos</li>
+					
+						<li>Adicionar pelo menos uma velocidade</li>
+					
+						<li>Clicar em Enviar LPU</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Viabilidade Aprovada') e o usuário pode criar uma proposta com esta viabilidade nas velocidades adicionadas.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status &#39;Viabilidade Aprovada&#39;) e o usuário pode criar uma proposta com esta viabilidade nas velocidades adicionadas.][result]"cols="80" rows="4"></textarea></span>
+				</div>
+			</div>
+
+			<div class="test">
+				<div class="conditions">
+					<span class="field">Condições</span>
+					<ul></ul>
+				</div>
+				<div class="procedures">
+					<span class="field">Procedimentos</span>
+					<ol>
+						<li>Clicar &#39;Detalhar Pedido de Viabilidade&#39; em uma das viabilidades com status = &#39;Aguardando Análise Prevendas&#39;</li>
+					
+						<li>Preencher as variações possíveis de paramêtros</li>
+					
+						<li>Adicionar ou Vincular LPU</li>
+					
+						<li>Ao voltar para a tela, clicar em filtrar por &#39;Viabilidade Aprovada&#39;</li>
+					
+						<li>Clicar em visualizar a proposta que acabaste de gerar</li>
+					</ol>
+				</div>
+				<div class="expected">
+					<span class="field">Resultado Experado</span>
+					<span>Os dados devem bater.</span>
+				</div>
+				<div class="result">
+					<span class="field">Resultado Obtido</span>
+					<span>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="0">
+						Falhou</label>
+						<label><input type="radio" name="result[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][]" value="1">
+						Passou</label>
+					</span>
+				</div>
+				<div class="comentarios">
+					<span class="field">Comentários</span>
+					<span><textarea name="test[http:&#x2F;&#x2F;192.168.10.33&#x2F;prevenda&#x2F;viabilidadeComercial&#x2F;listar][Os dados devem bater.][result]"cols="80" rows="4"></textarea></span>
 				</div>
 			</div>
 		</div>

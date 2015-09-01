@@ -192,5 +192,124 @@
 				}
 			]
 		},
+		{
+			"target": "http://192.168.10.33/engenharia/viabilidade/pendencias",
+			"comment": "Tenha permissão '[ENGENHARIA] Viabilidade' e '[ENGENHARIA Responder Solicitação de Viabilidade' total. Para criar pendencias novas use o Análisar viabilidade do teste anterior",
+			"tests": [
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Preencher Observações",
+						"Clicar em enviar análise"
+					],
+					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status Aguardando Análise Prevendas)"
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Deixar Observações vazias",
+						"Clicar em enviar análise"
+					],
+					"expected": "Erro"
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Clicar em Adicionar Produto"
+					],
+					"expected": "Permite Escolher um produto e quantidade. Ambos são salváveis"
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Clicar em Adicionar Produto",
+						"Clicar em '+'",
+						"Escolher ID Luma ou Outro Produto",
+						"Escolher um produto que não está na lista"
+					],
+					"expected": "O produto deve aparecer na lista e podem ser editados/salvos"
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Clicar em Adicionar Grupo",
+						"Escolher um grupo Qualquer"
+					],
+					"expected": "O grupo deve aparecer com vários produtos, cada qual com quantidades pré-determinadas. As quantidades são editáveis, mas os produtos não o são."
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Preencher as variações possíveis de paramêtros",
+						"Clicar 'Enviar Análise'",
+						"Ao voltar para a tela, clicar em filtrar por 'Aguardando Análise Engenharia'",
+						"Clicar em visualizar a proposta que acabaste de gerar"
+					],
+					"expected": "Os dados devem bater."
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
+						"Preencher as variações possíveis de paramêtros",
+						"Clicar no Desenhar Linha (no mapa) e desenhe uma linha",
+						"Clicar 'Enviar Análise'",
+						"Ao voltar para a tela, clicar em filtrar por 'Aguardando Análise Engenharia'",
+						"Clicar em visualizar a proposta que acabaste de gerar"
+					],
+					"expected": "Os dados devem bater, e o mapa também."
+				}
+			]
+		},
+		{
+			"target": "http://192.168.10.33/prevenda/viabilidadeComercial/listar",
+			"comment": "Tenha permissão '[PREVENDA] Admin' total. Para criar pendencias novas use o Análisar viabilidade do teste anterior",
+			"tests": [
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
+						"Clicar em enviar 'Inviável'"
+					],
+					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Inviável por motivos Prevendas')"
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
+						"Clicar em enviar 'Vincular Lpu'"
+					],
+					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Viabilidade Aprovada') e o usuário pode criar uma proposta com esta viabilidade."
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
+						"Clicar em enviar 'Adicionar Lpu'",
+						"Preencher campos",
+						"Adicionar pelo menos uma velocidade",
+						"Clicar em Enviar LPU"
+					],
+					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Viabilidade Aprovada') e o usuário pode criar uma proposta com esta viabilidade nas velocidades adicionadas."
+				},
+				{
+					"conditions":[],
+					"procedures": [
+						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
+						"Preencher as variações possíveis de paramêtros",
+						"Adicionar ou Vincular LPU",
+						"Ao voltar para a tela, clicar em filtrar por 'Viabilidade Aprovada'",
+						"Clicar em visualizar a proposta que acabaste de gerar"
+					],
+					"expected": "Os dados devem bater."
+				}
+			]
+		}
 	]
 }
