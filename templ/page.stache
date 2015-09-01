@@ -1,0 +1,38 @@
+<div class="page">
+	<button class="jAddpage pure-button">Adicionar P&aacute;gina Antes Desta</button>	
+	<div class="attr">
+		<label for="url{{ id }}">Endere&ccedil;o: </label>
+		<input type="url" id="url{{ id }}">
+	</div>
+	<div class="attr">
+		<label for="comment{{ id }}">Coment&aacute;rios:</label>
+		<textarea id="comment{{ id }}" cols="30" rows="10" class="comment"></textarea>
+	</div>
+	<div class="attr">
+		<label>Testes:</label>
+		<div class="tests">
+			<div class="test">
+				<div>
+					<label for="conditions{{ id }}_0">Condi&ccedil;&otilde;es:</label>
+					<br>
+					<textarea id="conditions{{ id }}_0" cols="30" rows="10" class="comment"></textarea>
+				</div>
+				<div>
+					<label for="procedures{{ id }}_0">Passos:</label>
+					<br>
+					<textarea id="procedures{{ id }}_0" cols="30" rows="10" class="comment"></textarea>
+				</div>
+				<div>
+					<label for="expected{{ id }}_0">Resultado Experado:</label>
+					<br>
+					<textarea id="expected{{ id }}_0" cols="30" rows="10" class="comment"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="attr">
+		<div></div>
+		<button type="button" class="pure-button pure-button-primary jAddtest">Adicionar Teste</button>
+	</div>
+	<hr>
+</div>

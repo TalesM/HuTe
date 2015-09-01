@@ -1,0 +1,17 @@
+<div class="test">
+	<div>
+		<label for="conditions{{ id }}_0">Condi&ccedil;&otilde;es:</label>
+		<br>
+		<textarea id="conditions{{ id }}_0" cols="30" rows="10" class="comment"></textarea>
+	</div>
+	<div>
+		<label for="procedures{{ id }}_0">Passos:</label>
+		<br>
+		<textarea id="procedures{{ id }}_0" cols="30" rows="10" class="comment"></textarea>
+	</div>
+	<div>
+		<label for="expected{{ id }}_0">Resultado Experado:</label>
+		<br>
+		<textarea id="expected{{ id }}_0" cols="30" rows="10" class="comment"></textarea>
+	</div>
+</div>

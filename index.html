@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Test Planner</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<style>
+	.page::before{ counter-increment: page; content: "Pagina "counter(page)")"; font-weight: bold;}
+	.attr{display: table-row;}
+	.attr > * {display: table-cell;}
+	
+	.attr label {vertical-align: top; padding-right: .5em;}
+	body{counter-reset: page;}
+	.test {border: 1px dotted black;}
+	.test > div {display: inline-block;}
+	</style>
+</head>
+<body>
+	<h1>Test Planner</h1>
+	<div id="pages">
+		<label for="suite">Nome Suite:</label> <input type="text" id="suite">
+		<hr>
+	</div>
+	<button class="jAddpage pure-button pure-button-primary">Adicionar P&aacute;gina</button>
+
+	<script src="bower_components/requirejs/require.js"></script>
+	<script src="gen/jquery-2.1.4.min.js"></script>
+	<script>
+		require(['config'], function (config) {
+			var $pages = $('#pages');
+			$('.jAddpage').click(function(event) {
+				require(['stache!page'], function (page) {
+					$pages.append(page({id: $pages.find('.page').length}));
+				});
+			});
+			$pages.on('click', '.jAddpage', function() {
+				var $this = $(this);
+				require(['stache!page'], function (page) {
+					$this.closest('.page').before(page({id: $pages.find('.page').length}));
+				});
+			});
+			$pages.on('click', '.jAddtest', function() {
+				var $this = $(this);
+				var $tests = $this.closest('.page').find('.tests');
+				require(['stache!test'], function (test) {
+					$tests.append(test({id: $tests.find('.test').length}));
+				});
+			});
+		});
+	</script>
+</body>
+</html>
