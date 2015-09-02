@@ -77,16 +77,11 @@
 			});
 			$('.jExportJSON').click(function() {
 				var suite = exportObject();
-				console.log(suite);
 				var blob = new Blob( [JSON.stringify(suite)], {type: 'application/json'} );
 				this.href = URL.createObjectURL(blob);
 				this.download = 'test'+suite.suite+new Date().toISOString()+'.json';
 			});
 			$('.jImportJSON').click(function() {
-				if(!confirm('Deseja mesmo importar? Isto vai eliminar todas as informacoes atuais')){
-					return;
-				}
-				clear();
 				$('#fileInput').click();
 			});
 			$('.jClear').click(function() {
@@ -96,6 +91,7 @@
 				clear();
 			});
 			$('#fileInput').change(function(event) {
+				clear();
 				var file = this.files[0];
 				if(!file){
 					return;
@@ -107,6 +103,27 @@
 				};
 				reader.readAsText(file);
 			});
+			$(document).keydown(function(event) {
+				if(event.ctrlKey){
+					switch(event.which){
+					case 79:
+						$('.jImportJSON').click();
+						return false;
+					case 83:
+						$('.jExportJSON').click();
+						return false;
+					default:
+						return true;
+					}
+				}
+			});
+
+			if(window.sessionStorage['test']){
+				importObject(JSON.parse(window.sessionStorage['test']));
+			}
+			backupSaver();
+
+
 			function importObject(obj) {
 				$('#suite').val(obj.suite);
 				var pages = obj.pages.map(function(page, ind) {
@@ -158,6 +175,10 @@
 			function clear(){
 				$('#pages > div').remove();
 				$('#suite').val('');
+			}
+			function backupSaver() {
+				window.sessionStorage['test'] = JSON.stringify(exportObject());
+				setTimeout(backupSaver, 1000);
 			}
 		});
 	</script>
