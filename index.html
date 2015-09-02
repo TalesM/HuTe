@@ -78,20 +78,57 @@
 			$('.jExportJSON').click(function() {
 				var suite = exportObject();
 				console.log(suite);
+				var blob = new Blob( [JSON.stringify(suite)], {type: 'application/json'} );
+				this.href = URL.createObjectURL(blob);
 				this.download = 'test'+suite.suite+new Date().toISOString()+'.json';
-				this.href = 'data:application/JSON;text,'+JSON.stringify(suite);
 			});
 			$('.jImportJSON').click(function() {
 				if(!confirm('Deseja mesmo importar? Isto vai eliminar todas as informacoes atuais')){
 					return;
 				}
+				clear();
 				$('#fileInput').click();
 			});
 			$('.jClear').click(function() {
 				if(!confirm('Deseja mesmo eliminar todas as informacoes atuais?')){
 					return;
 				}
+				clear();
 			});
+			$('#fileInput').change(function(event) {
+				var file = this.files[0];
+				if(!file){
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					var json = JSON.parse(e.target.result);
+					importObject(json)
+				};
+				reader.readAsText(file);
+			});
+			function importObject(obj) {
+				$('#suite').val(obj.suite);
+				var pages = obj.pages.map(function(page, ind) {
+					return {
+						id: ind,
+						target: page.target||'',
+						comment: page.comment||'',
+						tests: page.tests.map(function(test, ind) {
+							return {
+								ord: ind,
+								conditions: test.conditions.join('\n\n'),
+								procedures: test.procedures.join('\n\n'),
+								expected: test.expected
+							};
+						})||[]
+					}
+				});
+				require(['stache!page'], function (page) {
+					$pages.append(page(pages));
+				});
+			}
+
 			function exportObject(){
 				return {
 					suite: $('#suite').val(),
@@ -105,9 +142,12 @@
 								var conditions = $test.find('.conditions').val() || '';
 								var procedures = $test.find('.procedures').val() || '';
 								var expected = $test.find('.expected').val() || '';
+								function filterEmpties (str) {
+									return str.trim();
+								}
 								return {
-									conditions: conditions.split('\n\n'),
-									procedures: procedures.split('\n\n'),
+									conditions: conditions.split('\n\n').filter(filterEmpties),
+									procedures: procedures.split('\n\n').filter(filterEmpties),
 									expected: expected
 								};
 							}).get(),

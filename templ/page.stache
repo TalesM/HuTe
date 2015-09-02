@@ -2,15 +2,15 @@
 	<button class="jAddpage pure-button">Adicionar P&aacute;gina Antes Desta</button>	
 	<div class="attr">
 		<label for="url{{ id }}">Endere&ccedil;o: </label>
-		<input type="url" id="url{{ id }}" class="target">
+		<input type="url" id="url{{ id }}" class="target" value="{{ target }}">
 	</div>
 	<div class="attr">
 		<label for="comment{{ id }}">Coment&aacute;rios:</label>
-		<textarea id="comment{{ id }}" cols="30" rows="10" class="comment"></textarea>
+		<textarea id="comment{{ id }}" cols="30" rows="10" class="comment">{{ comment }}</textarea>
 	</div>
 	<div class="attr">
 		<label>Testes:</label>
-		<div class="tests"></div>
+		<div class="tests">{{#tests}}{{>test}}{{/tests}}</div>
 	</div>
 	<div class="attr">
 		<div></div>
