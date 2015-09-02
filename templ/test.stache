@@ -2,16 +2,16 @@
 	<div>
 		<label for="conditions{{ id }}_0">Condi&ccedil;&otilde;es:</label>
 		<br>
-		<textarea class="conditions" id="conditions{{ id }}_0" cols="30" rows="10"></textarea>
+		<textarea class="conditions" id="conditions{{ id }}_0" cols="30" rows="10">{{conditions}}</textarea>
 	</div>
 	<div>
 		<label for="procedures{{ id }}_0">Passos:</label>
 		<br>
-		<textarea class="procedures" id="procedures{{ id }}_0" cols="30" rows="10"></textarea>
+		<textarea class="procedures" id="procedures{{ id }}_0" cols="30" rows="10">{{procedures}}</textarea>
 	</div>
 	<div>
 		<label for="expected{{ id }}_0">Resultado Experado:</label>
 		<br>
-		<textarea class="expected" id="expected{{ id }}_0" cols="30" rows="10"></textarea>
+		<textarea class="expected" id="expected{{ id }}_0" cols="30" rows="10">{{expected}}</textarea>
 	</div>
 </div>
