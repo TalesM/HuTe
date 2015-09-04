@@ -1,5 +1,8 @@
 <div class="page">
-	<button class="jAddpage pure-button">Adicionar P&aacute;gina Antes Desta</button>	
+	<button class="jAddpage pure-button">Adicionar P&aacute;gina Antes Desta</button>
+	<button class="jUppage pure-button button-secondary" title="Mover para cima">&bigtriangleup;</button>
+	<button class="jDownpage pure-button button-secondary" title="Mover para baixo">&bigtriangledown;</button>
+	<button class="jRemovepage pure-button button-error">&cross;</button>
 	<div class="attr">
 		<label for="url{{ id }}">Endere&ccedil;o: </label>
 		<input type="url" id="url{{ id }}" class="target" value="{{ target }}">
