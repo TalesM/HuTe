@@ -1,315 +1,386 @@
 {
-	"suite": "Movi",
-	"pages": [
-		{
-			"target": "http://192.168.10.33/movi/carteira/vincular",
-			"tests": [
-				{
-					"conditions":[],
-					"procedures": [
-						"Escolher um cliente com EV livre",
-						"Clicar em Adicionar Oportunidade de Cadastro \"+\"",
-						"Preencher Campos e clicar em \"Ativar Oportunidade\""
-					],
-					"expected": "Vínculo criado com sucesso e redireciona para \"http://192.168.10.33/movi/oportunidade/ver/<Número>\""
-				}, 
-				{
-					"conditions":[],
-					"procedures": [
-						"Escolher um cliente com EV existente",
-						"Clicar em Adicionar Oportunidade de Cadastro \"+\"",
-						"Preencher Campos e clicar em \"Ativar Oportunidade\""
-					],
-					"expected": "Vínculo criado com sucesso e redireciona para \"http://192.17.20.33/movi/oportunidade/ver/<Número>\""
-				}
-			]
-		},
-		{
-			"target": "http://192.168.10.33/movi/",
-			"tests": [
-				{
-					"conditions": ["Escolher Oportunidade sem Followup"],
-					"procedures": [
-						"Clicar em Adicionar",
-						"Escolher *Qualquer* meio"
-					],
-					"expected": "Apenas Abertura ou Recontato devem aparecer como opção de ação"
-				}, 
-				{
-					"conditions": ["Escolher Oportunidade em Contato Inicial"],
-					"procedures": [
-						"Clicar em Adicionar",
-						"Escolher *Qualquer* meio"
-					],
-					"expected": "Apenas Negociação deve aparecer como opção de ação"
-				}, 
-				{
-					"conditions": ["Escolher Oportunidade sem Proposta"],
-					"procedures": [
-						"Clicar em Adicionar",
-						"Escolher *Qualquer* meio"
-					],
-					"expected": "Não deve ser possível fechar"
-				}, 
-				{
-					"conditions": ["Escolher Oportunidade Fechada"],
-					"procedures": [
-						"Clicar em Adicionar",
-						"Escolher *Qualquer* meio"
-					],
-					"expected": "Não deve ser possível negociar"
-				}, 
-				{
-					"conditions": [],
-					"procedures": [
-						"Clicar em Adicionar",
-						"Preencher Campos aleatóriamente",
-						"Escolher *Qualquer* campo e deixar vazio (exceto proposta ou arquivo)",
-						"Clicar Salvar Followup"
-					],
-					"expected": "Erro"
-				}, 
-				{
-					"conditions": [],
-					"procedures": [
-						"Clicar em Adicionar",
-						"Preencher Campos aleatóriamente",
-						"Preencher Arquivo",
-						"Clicar Salvar Followup"
-					],
-					"expected": "Salvar com sucesso e o arquivo deve ficar disponível para download na"
-				}
-			]
-		},
-		{
-			"target": "http://192.168.10.33/movi/proposta/listar/<Número>",
-			"comment": "Escolha algum a partir de http://192.168.10.33/movi/home ou crie a partir de http://192.168.10.33/movi/carteira/vincular e clique em \"Propostas\"",
-			"tests": [
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar em Verificar Viabilidade",
-						"Colocar CEP de um local atendido (Por Ex: \"94955-490\")",
-						"Preencher Todos os Campos e clicar em \"Próximo\"",
-						"Clicar em \"Analisar Viabilidade\""
-					],
-					"expected": "Aparecer a mensagem \"Sucesso! Há viabilidade automática para o endereço solicitado!\""
-				}, 
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar em Verificar Viabilidade",
-						"Colocar CEP de um local atendido (Por Ex: \"94955-490\")",
-						"Preencher Todos os Campos, colocando uma velocidade absurda (algo como 1000 GB) e clicar em \"Próximo\"",
-						"Clicar em \"Analisar Viabilidade\""
-					],
-					"expected": "Aparecer a mensagem \"Erro! não há viabilidade para a velocidade selecionada, mas há para velocidades menores!\""
-				}, 
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar em Verificar Viabilidade",
-						"Colocar CEP de um local não atendido (Por Ex: \"91530-360\")",
-						"Preencher Todos os Campos e clicar em \"Próximo\"",
-						"Clicar em \"Analisar Viabilidade\""
-					],
-					"expected": "Aparecer a mensagem \"Erro! Não Há viabilidade automática para o endereço solicitado!\" e ao salvar esta fica com um status vermelho."
-				}, 
-				{
-					"conditions":["Oportunidade com pelo menos um Followup"],
-					"procedures": [
-						"Clicar em \"Adicionar Proposta\"",
-						"Clicar em \"Usar Lista de Preço\"",
-						"Preencher primeira página"
-					],
-					"expected": "Mensagem \"Adicionado com sucesso\", após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da \"lupa\" na viabilidade."
-				}, 
-				{
-					"conditions":["Oportunidade com ZERO Followups"],
-					"procedures": [
-						"Clicar em \"Adicionar Proposta\"",
-						"Clicar em \"Usar Lista de Preço\"",
-						"Preencher Campos da primeira página e clicar em \"Ok\""
-					],
-					"expected": "Mensagem de erro"
-				},
-				{
-					"conditions":["Oportunidade com pelo menos um Followup"],
-					"procedures": [
-						"Clicar em \"Adicionar Proposta\"",
-						"Clicar em \"Usar Lista de Preço\"",
-						"Preencher primeira página apenas parcialmente (testar para cada combinação de campos)"
-					],
-					"expected": "Erro de Validação"
-				},
-				{
-					"conditions":["Oportunidade com pelo menos um Followups"],
-					"procedures": [
-						"Clicar em \"Adicionar Proposta\"",
-						"Clicar em \"Usar Lista de Preço\"",
-						"Preencher primeira página",
-						"Preencher segunda página",
-						"Preencher terceira página"
-					],
-					"expected": "Mensagem \"Adicionado com sucesso\", após isso aparece o arquivo proposta-####.pdf para download e ele se torna visível a partir da \"lupa\" na viabilidade."
-				},
-				{
-					"conditions":["Oportunidade com pelo menos um Followup"],
-					"procedures": [
-						"Clicar em \"Adicionar Proposta\"",
-						"Clicar em \"Usar Lista de Preço\"",
-						"Preencher primeira página",
-						"Preencher segunda página parcialmente para cada pessoa (http://simuladordecpf.com.br/ pode ajudar)"
-					],
-					"expected": "Erro de Validação"
-				},
-				{
-					"conditions":["Oportunidade com pelo menos um Followup"],
-					"procedures": [
-						"Clicar em \"Adicionar Proposta\"",
-						"Clicar em \"Usar Lista de Preço\"",
-						"Preencher primeira página",
-						"Preencher segunda página",
-						"Preencher terceira página parcialmente"
-					],
-					"expected": "Erro de Validação"
-				},
-				{
-					"conditions":["Oportunidade com pelo menos um Followup"],
-					"procedures": [
-						"Clicar em \"Visualizar Proposta\"",
-						"Clicar em \"Visualizar Arquivo\""
-					],
-					"expected": "Visualizar o PDF, deve baixar quase imediatamente"
-				},
-				{
-					"conditions":["Oportunidade com pelo menos um Followup"],
-					"procedures": [
-						"Clicar em \"Visualizar Proposta\"",
-						"Clicar em \"Gerar Novo Arquivo\""
-					],
-					"expected": "Visualizar o PDF, não deve ser tão rápido"
-				}
-			]
-		},
-		{
-			"target": "http://192.168.10.33/engenharia/viabilidade/pendencias",
-			"comment": "Tenha permissão '[ENGENHARIA] Viabilidade' e '[ENGENHARIA Responder Solicitação de Viabilidade' total. Para criar pendencias novas use o Análisar viabilidade do teste anterior",
-			"tests": [
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Preencher Observações",
-						"Clicar em enviar análise"
-					],
-					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status Aguardando Análise Prevendas)"
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Deixar Observações vazias",
-						"Clicar em enviar análise"
-					],
-					"expected": "Erro"
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Clicar em Adicionar Produto"
-					],
-					"expected": "Permite Escolher um produto e quantidade. Ambos são salváveis"
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Clicar em Adicionar Produto",
-						"Clicar em '+'",
-						"Escolher ID Luma ou Outro Produto",
-						"Escolher um produto que não está na lista"
-					],
-					"expected": "O produto deve aparecer na lista e podem ser editados/salvos"
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Clicar em Adicionar Grupo",
-						"Escolher um grupo Qualquer"
-					],
-					"expected": "O grupo deve aparecer com vários produtos, cada qual com quantidades pré-determinadas. As quantidades são editáveis, mas os produtos não o são."
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Preencher as variações possíveis de paramêtros",
-						"Clicar 'Enviar Análise'",
-						"Ao voltar para a tela, clicar em filtrar por 'Aguardando Análise Engenharia'",
-						"Clicar em visualizar a proposta que acabaste de gerar"
-					],
-					"expected": "Os dados devem bater."
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando Análise de Engenharia'",
-						"Preencher as variações possíveis de paramêtros",
-						"Clicar no Desenhar Linha (no mapa) e desenhe uma linha",
-						"Clicar 'Enviar Análise'",
-						"Ao voltar para a tela, clicar em filtrar por 'Aguardando Análise Engenharia'",
-						"Clicar em visualizar a proposta que acabaste de gerar"
-					],
-					"expected": "Os dados devem bater, e o mapa também."
-				}
-			]
-		},
-		{
-			"target": "http://192.168.10.33/prevenda/viabilidadeComercial/listar",
-			"comment": "Tenha permissão '[PREVENDA] Admin' total. Para criar pendencias novas use o Análisar viabilidade do teste anterior",
-			"tests": [
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
-						"Clicar em enviar 'Inviável'"
-					],
-					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Inviável por motivos Prevendas')"
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
-						"Clicar em enviar 'Vincular Lpu'"
-					],
-					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Viabilidade Aprovada') e o usuário pode criar uma proposta com esta viabilidade."
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
-						"Clicar em enviar 'Adicionar Lpu'",
-						"Preencher campos",
-						"Adicionar pelo menos uma velocidade",
-						"Clicar em Enviar LPU"
-					],
-					"expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas é visível ao filtrar pelo status 'Viabilidade Aprovada') e o usuário pode criar uma proposta com esta viabilidade nas velocidades adicionadas."
-				},
-				{
-					"conditions":[],
-					"procedures": [
-						"Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando Análise Prevendas'",
-						"Preencher as variações possíveis de paramêtros",
-						"Adicionar ou Vincular LPU",
-						"Ao voltar para a tela, clicar em filtrar por 'Viabilidade Aprovada'",
-						"Clicar em visualizar a proposta que acabaste de gerar"
-					],
-					"expected": "Os dados devem bater."
-				}
-			]
-		}
-	]
+    "pages": [
+        {
+            "comment": "",
+            "target": "http://192.168.10.33/movi/carteira/vincular",
+            "tests": [
+                {
+                    "conditions": [],
+                    "expected": "V\u00ednculo criado com sucesso e redireciona para \"http://192.168.10.33/movi/oportunidade/ver/<N\u00famero>\"",
+                    "procedures": [
+                        "Escolher um cliente com EV livre",
+                        "Clicar em Adicionar Oportunidade de Cadastro \"+\"",
+                        "Preencher Campos e clicar em \"Ativar Oportunidade\""
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "V\u00ednculo criado com sucesso e redireciona para \"http://192.17.20.33/movi/oportunidade/ver/<N\u00famero>\"",
+                    "procedures": [
+                        "Escolher um cliente com EV existente",
+                        "Clicar em Adicionar Oportunidade de Cadastro \"+\"",
+                        "Preencher Campos e clicar em \"Ativar Oportunidade\""
+                    ]
+                }
+            ]
+        },
+        {
+            "comment": "",
+            "target": "http://192.168.10.33/movi/",
+            "tests": [
+                {
+                    "conditions": [
+                        "Escolher Oportunidade sem Followup"
+                    ],
+                    "expected": "Apenas Abertura ou Recontato devem aparecer como op\u00e7\u00e3o de a\u00e7\u00e3o",
+                    "procedures": [
+                        "Clicar em Adicionar",
+                        "Escolher *Qualquer* meio"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Escolher Oportunidade em Contato Inicial"
+                    ],
+                    "expected": "Apenas Negocia\u00e7\u00e3o deve aparecer como op\u00e7\u00e3o de a\u00e7\u00e3o",
+                    "procedures": [
+                        "Clicar em Adicionar",
+                        "Escolher *Qualquer* meio"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Escolher Oportunidade sem Proposta"
+                    ],
+                    "expected": "N\u00e3o deve ser poss\u00edvel fechar",
+                    "procedures": [
+                        "Clicar em Adicionar",
+                        "Escolher *Qualquer* meio"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Escolher Oportunidade Fechada"
+                    ],
+                    "expected": "N\u00e3o deve ser poss\u00edvel negociar",
+                    "procedures": [
+                        "Clicar em Adicionar",
+                        "Escolher *Qualquer* meio"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Erro",
+                    "procedures": [
+                        "Clicar em Adicionar",
+                        "Preencher Campos aleat\u00f3riamente",
+                        "Escolher *Qualquer* campo e deixar vazio (exceto proposta ou arquivo)",
+                        "Clicar Salvar Followup"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Salvar com sucesso e o arquivo deve ficar dispon\u00edvel para download na",
+                    "procedures": [
+                        "Clicar em Adicionar",
+                        "Preencher Campos aleat\u00f3riamente",
+                        "Preencher Arquivo",
+                        "Clicar Salvar Followup"
+                    ]
+                }
+            ]
+        },
+        {
+            "comment": "Escolha algum a partir de http://192.168.10.33/movi/home ou crie a partir de http://192.168.10.33/movi/carteira/vincular e clique em \"Propostas\"",
+            "target": "http://192.168.10.33/movi/proposta/listar/<N\u00famero>",
+            "tests": [
+                {
+                    "conditions": [],
+                    "expected": "Aparecer a mensagem \"Sucesso! H\u00e1 viabilidade autom\u00e1tica para o endere\u00e7o solicitado!\"",
+                    "procedures": [
+                        "Clicar em Verificar Viabilidade",
+                        "Colocar CEP de um local atendido (Por Ex: \"94955-490\")",
+                        "Preencher Todos os Campos e clicar em \"Pr\u00f3ximo\"",
+                        "Clicar em \"Analisar Viabilidade\""
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Aparecer a mensagem \"Erro! n\u00e3o h\u00e1 viabilidade para a velocidade selecionada, mas h\u00e1 para velocidades menores!\"",
+                    "procedures": [
+                        "Clicar em Verificar Viabilidade",
+                        "Colocar CEP de um local atendido (Por Ex: \"94955-490\")",
+                        "Preencher Todos os Campos, colocando uma velocidade absurda (algo como 1000 GB) e clicar em \"Pr\u00f3ximo\"",
+                        "Clicar em \"Analisar Viabilidade\""
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Aparecer a mensagem \"Erro! N\u00e3o H\u00e1 viabilidade autom\u00e1tica para o endere\u00e7o solicitado!\" e ao salvar esta fica com um status vermelho.",
+                    "procedures": [
+                        "Clicar em Verificar Viabilidade",
+                        "Colocar CEP de um local n\u00e3o atendido (Por Ex: \"91530-360\")",
+                        "Preencher Todos os Campos e clicar em \"Pr\u00f3ximo\"",
+                        "Clicar em \"Analisar Viabilidade\""
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followup"
+                    ],
+                    "expected": "Mensagem \"Adicionado com sucesso\", ap\u00f3s isso aparece o arquivo proposta-####.pdf para download e ele se torna vis\u00edvel a partir da \"lupa\" na viabilidade.",
+                    "procedures": [
+                        "Clicar em \"Adicionar Proposta\"",
+                        "Clicar em \"Usar Lista de Pre\u00e7o\"",
+                        "Preencher primeira p\u00e1gina"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com ZERO Followups"
+                    ],
+                    "expected": "Mensagem de erro",
+                    "procedures": [
+                        "Clicar em \"Adicionar Proposta\"",
+                        "Clicar em \"Usar Lista de Pre\u00e7o\"",
+                        "Preencher Campos da primeira p\u00e1gina e clicar em \"Ok\""
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followup"
+                    ],
+                    "expected": "Erro de Valida\u00e7\u00e3o",
+                    "procedures": [
+                        "Clicar em \"Adicionar Proposta\"",
+                        "Clicar em \"Usar Lista de Pre\u00e7o\"",
+                        "Preencher primeira p\u00e1gina apenas parcialmente (testar para cada combina\u00e7\u00e3o de campos)"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followups"
+                    ],
+                    "expected": "Mensagem \"Adicionado com sucesso\", ap\u00f3s isso aparece o arquivo proposta-####.pdf para download e ele se torna vis\u00edvel a partir da \"lupa\" na viabilidade.",
+                    "procedures": [
+                        "Clicar em \"Adicionar Proposta\"",
+                        "Clicar em \"Usar Lista de Pre\u00e7o\"",
+                        "Preencher primeira p\u00e1gina",
+                        "Preencher segunda p\u00e1gina",
+                        "Preencher terceira p\u00e1gina"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followup"
+                    ],
+                    "expected": "Erro de Valida\u00e7\u00e3o",
+                    "procedures": [
+                        "Clicar em \"Adicionar Proposta\"",
+                        "Clicar em \"Usar Lista de Pre\u00e7o\"",
+                        "Preencher primeira p\u00e1gina",
+                        "Preencher segunda p\u00e1gina parcialmente para cada pessoa (http://simuladordecpf.com.br/ pode ajudar)"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followup"
+                    ],
+                    "expected": "Erro de Valida\u00e7\u00e3o",
+                    "procedures": [
+                        "Clicar em \"Adicionar Proposta\"",
+                        "Clicar em \"Usar Lista de Pre\u00e7o\"",
+                        "Preencher primeira p\u00e1gina",
+                        "Preencher segunda p\u00e1gina",
+                        "Preencher terceira p\u00e1gina parcialmente"
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followup"
+                    ],
+                    "expected": "Visualizar o PDF, deve baixar quase imediatamente",
+                    "procedures": [
+                        "Clicar em \"Visualizar Proposta\"",
+                        "Clicar em \"Visualizar Arquivo\""
+                    ]
+                },
+                {
+                    "conditions": [
+                        "Oportunidade com pelo menos um Followup"
+                    ],
+                    "expected": "Visualizar o PDF, n\u00e3o deve ser t\u00e3o r\u00e1pido",
+                    "procedures": [
+                        "Clicar em \"Visualizar Proposta\"",
+                        "Clicar em \"Gerar Novo Arquivo\""
+                    ]
+                }
+            ]
+        },
+        {
+            "comment": "Tenha permiss\u00e3o '[ENGENHARIA] Viabilidade' e '[ENGENHARIA Responder Solicita\u00e7\u00e3o de Viabilidade' total. Para criar pendencias novas use o An\u00e1lisar viabilidade do teste anterior",
+            "target": "http://192.168.10.33/engenharia/viabilidade/pendencias",
+            "tests": [
+                {
+                    "conditions": [],
+                    "expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas \u00e9 vis\u00edvel ao filtrar pelo status Aguardando An\u00e1lise Prevendas)",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Preencher Observa\u00e7\u00f5es",
+                        "Clicar em enviar an\u00e1lise"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Erro",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Deixar Observa\u00e7\u00f5es vazias",
+                        "Clicar em enviar an\u00e1lise"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Permite Escolher um produto e quantidade. Ambos s\u00e3o salv\u00e1veis",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Clicar em Adicionar Produto"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "O produto deve aparecer na lista e podem ser editados/salvos",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Clicar em Adicionar Produto",
+                        "Clicar em '+'",
+                        "Escolher ID Luma ou Outro Produto",
+                        "Escolher um produto que n\u00e3o est\u00e1 na lista"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "O grupo deve aparecer com v\u00e1rios produtos, cada qual com quantidades pr\u00e9-determinadas. As quantidades s\u00e3o edit\u00e1veis, mas os produtos n\u00e3o o s\u00e3o.",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Clicar em Adicionar Grupo",
+                        "Escolher um grupo Qualquer"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Os dados devem bater.",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Preencher as varia\u00e7\u00f5es poss\u00edveis de param\u00eatros",
+                        "Clicar 'Enviar An\u00e1lise'",
+                        "Ao voltar para a tela, clicar em filtrar por 'Aguardando An\u00e1lise Engenharia'",
+                        "Clicar em visualizar a proposta que acabaste de gerar"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Os dados devem bater, e o mapa tamb\u00e9m.",
+                    "procedures": [
+                        "Clicar 'Analisar Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise de Engenharia'",
+                        "Preencher as varia\u00e7\u00f5es poss\u00edveis de param\u00eatros",
+                        "Clicar no Desenhar Linha (no mapa) e desenhe uma linha",
+                        "Clicar 'Enviar An\u00e1lise'",
+                        "Ao voltar para a tela, clicar em filtrar por 'Aguardando An\u00e1lise Engenharia'",
+                        "Clicar em visualizar a proposta que acabaste de gerar"
+                    ]
+                }
+            ]
+        },
+        {
+            "comment": "Tenha permiss\u00e3o '[PREVENDA] Admin' total. Para criar pendencias novas use o An\u00e1lisar viabilidade do teste anterior",
+            "target": "http://192.168.10.33/prevenda/viabilidadeComercial/listar",
+            "tests": [
+                {
+                    "conditions": [],
+                    "expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas \u00e9 vis\u00edvel ao filtrar pelo status 'Invi\u00e1vel por motivos Prevendas')",
+                    "procedures": [
+                        "Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise Prevendas'",
+                        "Clicar em enviar 'Invi\u00e1vel'"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas \u00e9 vis\u00edvel ao filtrar pelo status 'Viabilidade Aprovada') e o usu\u00e1rio pode criar uma proposta com esta viabilidade.",
+                    "procedures": [
+                        "Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise Prevendas'",
+                        "Clicar em enviar 'Vincular Lpu'"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Deve ser atualizado com sucesso e redirecionado para a tela anterior, onde o pedido some (mas \u00e9 vis\u00edvel ao filtrar pelo status 'Viabilidade Aprovada') e o usu\u00e1rio pode criar uma proposta com esta viabilidade nas velocidades adicionadas.",
+                    "procedures": [
+                        "Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise Prevendas'",
+                        "Clicar em enviar 'Adicionar Lpu'",
+                        "Preencher campos",
+                        "Adicionar pelo menos uma velocidade",
+                        "Clicar em Enviar LPU"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "Os dados devem bater.",
+                    "procedures": [
+                        "Clicar 'Detalhar Pedido de Viabilidade' em uma das viabilidades com status = 'Aguardando An\u00e1lise Prevendas'",
+                        "Preencher as varia\u00e7\u00f5es poss\u00edveis de param\u00eatros",
+                        "Adicionar ou Vincular LPU",
+                        "Ao voltar para a tela, clicar em filtrar por 'Viabilidade Aprovada'",
+                        "Clicar em visualizar a proposta que acabaste de gerar"
+                    ]
+                }
+            ]
+        },
+        {
+            "comment": "Tenha permiss\u00e3o '[PREVENDA] Admin' total. ",
+            "target": "http://192.168.10.33/prevenda/lpu/",
+            "tests": [
+                {
+                    "conditions": [],
+                    "expected": "Uma nova lista \u00e9 criada com as informa\u00e7\u00f5es inseridas e a tela de mostrar essa lpu em detalhe.",
+                    "procedures": [
+                        "Apertar \"Adicionar LPU\"",
+                        "Preencher com valores adequados (Validade > hoje, Distancia > 0, etc)",
+                        "Clicar \"Adicionar Lista\""
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "A p\u00e1gina deve mostrar a mesma LPU, com as velocidades adicionadas.",
+                    "procedures": [
+                        "Detalhar uma das LPUs",
+                        "Clicar em Adicionar Velocidade <i>n</i> vezes",
+                        "Colocar valores aleat\u00f3rios",
+                        "Gravar altera\u00e7\u00f5es"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "A p\u00e1gina deve mostrar a mesma LPU, com as altera\u00e7\u00f5es. \n\nClicar na lupa mostra no mapa.\n\nCaso crie um pedido de viabilidade para um endere\u00e7o dentro da area selecionada (e do mesmo tipo de servi\u00e7o) agora d\u00e1 viabilidade autom\u00e1tica.",
+                    "procedures": [
+                        "Detalhar uma das LPUs",
+                        "Clicar em Vincular Viabilidade <i>n</i> vezes",
+                        "Escolher uma cidade",
+                        "Gravar altera\u00e7\u00f5es"
+                    ]
+                },
+                {
+                    "conditions": [],
+                    "expected": "A p\u00e1gina deve mostrar a mesma LPU, com as altera\u00e7\u00f5es. \n\nCaso crie um pedido de viabilidade dentro do range desta lpu, ao gerar a proposta e clicar em informa\u00e7\u00f5es adicionais aparecem as caracter\u00edsticas;",
+                    "procedures": [
+                        "Detalhar uma das LPUs",
+                        "Clicar em Adicionar Caracter\u00edstica <i>n</i> vezes",
+                        "Escolher uma nome, atributo, preencher valores de ativa\u00e7\u00e3o e mensalidade",
+                        "Salvar"
+                    ]
+                }
+            ]
+        }
+    ],
+    "suite": "Movi"
 }
