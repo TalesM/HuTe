@@ -17,30 +17,13 @@
     .button-success,
     .button-error,
     .button-warning,
-    .button-secondary {
-        color: white;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    }
-
-    .button-success {
-        background: rgb(28, 184, 65); /* this is a green */
-    }
-
-    .button-error {
-        background: rgb(202, 60, 60); /* this is a maroon */
-    }
-
-    .button-warning {
-        background: rgb(223, 117, 20); /* this is an orange */
-    }
-
-    .button-secondary {
-        background: rgb(66, 184, 221); /* this is a light blue */
-    }
-
-    .target {
-    	width: 100%;
-    }
+    .button-secondary {color: white; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2)}
+    .button-success {background: rgb(28, 184, 65)}
+    .button-error {background: rgb(202, 60, 60);}
+    .button-warning {background: rgb(223, 117, 20)}
+    .button-secondary {background: rgb(66, 184, 221)}
+    .target { width: 100%}
+    .buttons { position: absolute; margin-top: 2em; margin-left: -3em;}
 	</style>
 </head>
 <body>
@@ -59,132 +42,152 @@
 	<script src="bower_components/requirejs/require.js"></script>
 	<script src="gen/jquery-2.1.4.min.js"></script>
 	<script>
-		require(['config'], function (config) {
-			var $pages = $('#pages');
-			$('.jAddpage').click(function(event) {
-				require(['stache!page'], function (page) {
-					$pages.append(page({id: $pages.find('.page').length}));
-				});
-			});
-			$pages.on('click', '.jAddpage', function() {
-				var $this = $(this);
-				require(['stache!page'], function (page) {
-					$this.closest('.page').before(page({id: $pages.find('.page').length}));
-				});
-			});
-			$pages.on('click', '.jAddtest', function() {
-				var $this = $(this);
-				var $tests = $this.closest('.page').find('.tests');
-				require(['stache!test'], function (test) {
-					$tests.append(test({id: $tests.find('.test').length}));
-				});
-			});
-			$('.jExportJSON').click(function() {
-				var suite = exportObject();
-				var blob = new Blob( [JSON.stringify(suite)], {type: 'application/json'} );
-				this.href = URL.createObjectURL(blob);
-				this.download = 'test'+suite.suite+new Date().toISOString()+'.json';
-			});
-			$('.jImportJSON').click(function() {
-				$('#fileInput').click();
-			});
-			$('.jClear').click(function() {
-				if(!confirm('Deseja mesmo eliminar todas as informacoes atuais?')){
-					return;
-				}
-				clear();
-			});
-			$('#fileInput').change(function(event) {
-				clear();
-				var file = this.files[0];
-				if(!file){
-					return;
-				}
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					var json = JSON.parse(e.target.result);
-					importObject(json)
-				};
-				reader.readAsText(file);
-			});
-			$(document).keydown(function(event) {
-				if(event.ctrlKey){
-					switch(event.which){
-					case 79:
-						$('.jImportJSON').click();
-						return false;
-					case 83:
-						$('.jExportJSON').click();
-						return false;
-					default:
-						return true;
-					}
-				}
-			});
+require(['config'], function (config) {
+	var $pages = $('#pages');
+	if(window.sessionStorage['test']){
+		importObject(JSON.parse(window.sessionStorage['test']));
+	}
+	backupSaver();
 
-			if(window.sessionStorage['test']){
-				importObject(JSON.parse(window.sessionStorage['test']));
+	$('.jAddpage').click(function(event) {
+		require(['stache!page'], function (page) {
+			$pages.append(page({id: $pages.find('.page').length}));
+		});
+	});
+	$pages.on('click', '.jAddpage', function() {
+		var $this = $(this);
+		require(['stache!page'], function (page) {
+			$this.closest('.page').before(page({id: $pages.find('.page').length}));
+		});
+	});
+	$pages.on('click', '.jRemovepage', function() {
+		var $this = $(this);
+		var $page = $(this).closest('.page');
+		$page.remove();
+	});
+	$pages.on('click', '.jUppage', function() {
+		var $this = $(this);
+		var $page = $(this).closest('.page');
+		var $prev = $page.prev('.page');
+		if($prev.length){
+			$prev.before($page.detach());
+		}
+	});
+	$pages.on('click', '.jDownpage', function() {
+		var $this = $(this);
+		var $page = $(this).closest('.page');
+		var $next = $page.next('.page');
+		if($next.length){
+			$next.after($page.detach());
+		}
+	});
+	$pages.on('click', '.jAddtest', function() {
+		var $this = $(this);
+		var $tests = $this.closest('.page').find('.tests');
+		require(['stache!test'], function (test) {
+			$tests.append(test({id: $tests.find('.test').length}));
+		});
+	});
+	$('.jExportJSON').click(function() {
+		var suite = exportObject();
+		var blob = new Blob( [JSON.stringify(suite)], {type: 'application/json'} );
+		this.href = URL.createObjectURL(blob);
+		this.download = 'test'+suite.suite+new Date().toISOString()+'.json';
+	});
+	$('.jImportJSON').click(function() {
+		$('#fileInput').click();
+	});
+	$('.jClear').click(function() {
+		if(!confirm('Deseja mesmo eliminar todas as informacoes atuais?')){
+			return;
+		}
+		clear();
+	});
+	$('#fileInput').change(function(event) {
+		clear();
+		var file = this.files[0];
+		if(!file){
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			var json = JSON.parse(e.target.result);
+			importObject(json)
+		};
+		reader.readAsText(file);
+	});
+	$(document).keydown(function(event) {
+		if(event.ctrlKey){
+			switch(event.which){
+			case 79:
+				$('.jImportJSON').click();
+				return false;
+			case 83:
+				$('.jExportJSON').click();
+				return false;
+			default:
+				return true;
 			}
-			backupSaver();
+		}
+	});
 
-
-			function importObject(obj) {
-				$('#suite').val(obj.suite);
-				var pages = obj.pages.map(function(page, ind) {
+	function importObject(obj) {
+		$('#suite').val(obj.suite);
+		var pages = obj.pages.map(function(page, ind) {
+			return {
+				id: ind,
+				target: page.target||'',
+				comment: page.comment||'',
+				tests: page.tests.map(function(test, ind) {
 					return {
-						id: ind,
-						target: page.target||'',
-						comment: page.comment||'',
-						tests: page.tests.map(function(test, ind) {
-							return {
-								ord: ind,
-								conditions: test.conditions.join('\n\n'),
-								procedures: test.procedures.join('\n\n'),
-								expected: test.expected
-							};
-						})||[]
-					}
-				});
-				require(['stache!page'], function (page) {
-					$pages.append(page(pages));
-				});
+						ord: ind,
+						conditions: test.conditions.join('\n\n'),
+						procedures: test.procedures.join('\n\n'),
+						expected: test.expected
+					};
+				})||[]
 			}
+		});
+		require(['stache!page'], function (page) {
+			$pages.append(page(pages));
+		});
+	}
 
-			function exportObject(){
+	function exportObject(){
+		return {
+			suite: $('#suite').val(),
+			pages:$('.page').map(function(ind, page) {
+				var $page = $(this);
 				return {
-					suite: $('#suite').val(),
-					pages:$('.page').map(function(ind, page) {
-						var $page = $(this);
+					target: $page.find('.target').val(),
+					comment: $page.find('.comment').val(),
+					tests: $page.find('.test').map(function(ind, test) {
+						var $test = $(this);
+						var conditions = $test.find('.conditions').val() || '';
+						var procedures = $test.find('.procedures').val() || '';
+						var expected = $test.find('.expected').val() || '';
+						function filterEmpties (str) {
+							return str.trim();
+						}
 						return {
-							target: $page.find('.target').val(),
-							comment: $page.find('.comment').val(),
-							tests: $page.find('.test').map(function(ind, test) {
-								var $test = $(this);
-								var conditions = $test.find('.conditions').val() || '';
-								var procedures = $test.find('.procedures').val() || '';
-								var expected = $test.find('.expected').val() || '';
-								function filterEmpties (str) {
-									return str.trim();
-								}
-								return {
-									conditions: conditions.split('\n\n').filter(filterEmpties),
-									procedures: procedures.split('\n\n').filter(filterEmpties),
-									expected: expected
-								};
-							}).get(),
+							conditions: conditions.split('\n\n').filter(filterEmpties),
+							procedures: procedures.split('\n\n').filter(filterEmpties),
+							expected: expected
 						};
 					}).get(),
 				};
-			}
-			function clear(){
-				$('#pages > div').remove();
-				$('#suite').val('');
-			}
-			function backupSaver() {
-				window.sessionStorage['test'] = JSON.stringify(exportObject());
-				setTimeout(backupSaver, 1000);
-			}
-		});
+			}).get(),
+		};
+	}
+	function clear(){
+		$('#pages > div').remove();
+		$('#suite').val('');
+	}
+	function backupSaver() {
+		window.sessionStorage['test'] = JSON.stringify(exportObject());
+		setTimeout(backupSaver, 1000);
+	}
+});
 	</script>
 </body>
 </html>

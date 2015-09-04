@@ -1,4 +1,10 @@
 <div class="test">
+	<div class="buttons">
+		<button class="pure-button jAddtest">&plus;</button><br/>
+		<button class="pure-button button-secondary jUptest">&bigtriangleup;</button><br/>
+		<button class="pure-button button-secondary jDowntest">&bigtriangledown;</button><br/>
+		<button class="pure-button button-error jRemovetest">&cross;</button>
+	</div>
 	<div>
 		<label for="conditions{{ id }}_0">Condi&ccedil;&otilde;es:</label>
 		<br>
