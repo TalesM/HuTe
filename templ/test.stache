@@ -6,18 +6,18 @@
 		<button class="pure-button button-error jRemovetest">&cross;</button>
 	</div>
 	<div>
-		<label for="conditions{{ id }}_0">Condi&ccedil;&otilde;es:</label>
+		<label for="conditions{{test}}">Condi&ccedil;&otilde;es:</label>
 		<br>
-		<textarea class="conditions" id="conditions{{ id }}_0" cols="30" rows="10">{{conditions}}</textarea>
+		<textarea class="conditions" id="conditions{{test}}" cols="30" rows="10">{{conditions}}</textarea>
 	</div>
 	<div>
-		<label for="procedures{{ id }}_0">Passos:</label>
+		<label for="procedures{{test}}">Passos:</label>
 		<br>
-		<textarea class="procedures" id="procedures{{ id }}_0" cols="30" rows="10">{{procedures}}</textarea>
+		<textarea class="procedures" id="procedures{{test}}" cols="30" rows="10">{{procedures}}</textarea>
 	</div>
 	<div>
-		<label for="expected{{ id }}_0">Resultado Experado:</label>
+		<label for="expected{{test}}">Resultado Experado:</label>
 		<br>
-		<textarea class="expected" id="expected{{ id }}_0" cols="30" rows="10">{{expected}}</textarea>
+		<textarea class="expected" id="expected{{test}}" cols="30" rows="10">{{expected}}</textarea>
 	</div>
 </div>
