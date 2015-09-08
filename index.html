@@ -33,6 +33,7 @@
 		<hr>
 	</div>
 	<button class="jAddpage pure-button pure-button-primary">Adicionar P&aacute;gina</button>
+	<a class="jExportHTML pure-button button-success">Exportar HTML</a>
 	<a class="jExportJSON pure-button">Exportar JSON</a>
 	<button class="jImportJSON pure-button button-warning">Importar JSON</button>
 	<button class="jClear pure-button button-error">Limpar</button>
@@ -45,6 +46,7 @@
 require(['config'], function (config) {
 	var $pages = $('#pages');
 	var id = 1;
+	var templateHtml = null;
 	if(window.sessionStorage['test']){
 		importObject(JSON.parse(window.sessionStorage['test']));
 	}
@@ -62,9 +64,14 @@ require(['config'], function (config) {
 		});
 	});
 	$pages.on('click', '.jRemovepage', function() {
+		if(!confirm('Deseja Realmente excluir?')){
+			return;
+		}
 		var $this = $(this);
-		var $page = $(this).closest('.page');
-		$page.remove();
+		var $page = $this.closest('.page');
+		$page.hide('slow', function() {
+			$page.remove();
+		});
 	});
 	$pages.on('click', '.jUppage', function() {
 		var $this = $(this);
@@ -86,11 +93,64 @@ require(['config'], function (config) {
 	});
 	$pages.on('click', '.jAddtest', function() {
 		var $this = $(this);
-		var $tests = $this.closest('.page').find('.tests');
 		require(['stache!test'], function (test) {
-			$tests.append(test({test: id++}));
+			var testHtml = test({test: id++});
+			var $test = $this.closest('.test');
+			if($test.length){
+				$test.before(testHtml);
+			} else {
+				var $tests = $this.closest('.page').find('.tests');
+				$tests.append(testHtml);
+			}
 		});
 	});
+
+	$pages.on('click', '.jRemovetest', function() {
+		if(!confirm('Deseja Realmente excluir?')){
+			return;
+		}
+		var $this = $(this);
+		var $test = $this.closest('.test');
+		$test.hide('slow', function() {
+			$test.remove();
+		});
+	});
+
+
+	$pages.on('click', '.jUptest', function() {
+		var $this = $(this);
+		var $test = $(this).closest('.test');
+		var $prev = $test.prev('.test');
+		if($prev.length){
+			$prev.before($test.detach());
+			$(document).scrollTop($test.offset().top);
+		}
+	});
+
+
+	$pages.on('click', '.jDowntest', function() {
+		var $this = $(this);
+		var $test = $(this).closest('.test');
+		var $next = $test.next('.test');
+		if($next.length){
+			$next.after($test.detach());
+			$(document).scrollTop($test.offset().top);
+		}
+	});
+
+	$('.jExportHTML').click(function() {
+		require(['stache!teste'], function(template) {
+			var suite = exportObject();
+			suite.pages.forEach(function(elem) {
+				var j = 1;
+				elem.tests.forEach(function(test){
+					test.index = j++;
+				});
+			})
+			window.open('', 'output').document.write(template(suite));
+		});
+	});
+
 	$('.jExportJSON').click(function() {
 		var suite = exportObject();
 		var blob = new Blob( [JSON.stringify(suite)], {type: 'application/json'} );
