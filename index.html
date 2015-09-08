@@ -44,6 +44,7 @@
 	<script>
 require(['config'], function (config) {
 	var $pages = $('#pages');
+	var id = 1;
 	if(window.sessionStorage['test']){
 		importObject(JSON.parse(window.sessionStorage['test']));
 	}
@@ -51,13 +52,13 @@ require(['config'], function (config) {
 
 	$('.jAddpage').click(function(event) {
 		require(['stache!page'], function (page) {
-			$pages.append(page({id: $pages.find('.page').length}));
+			$pages.append(page({id: id++}));
 		});
 	});
 	$pages.on('click', '.jAddpage', function() {
 		var $this = $(this);
 		require(['stache!page'], function (page) {
-			$this.closest('.page').before(page({id: $pages.find('.page').length}));
+			$this.closest('.page').before(page({id: id++}));
 		});
 	});
 	$pages.on('click', '.jRemovepage', function() {
@@ -71,6 +72,7 @@ require(['config'], function (config) {
 		var $prev = $page.prev('.page');
 		if($prev.length){
 			$prev.before($page.detach());
+			$(document).scrollTop($page.offset().top);
 		}
 	});
 	$pages.on('click', '.jDownpage', function() {
@@ -79,13 +81,14 @@ require(['config'], function (config) {
 		var $next = $page.next('.page');
 		if($next.length){
 			$next.after($page.detach());
+			$(document).scrollTop($page.offset().top);
 		}
 	});
 	$pages.on('click', '.jAddtest', function() {
 		var $this = $(this);
 		var $tests = $this.closest('.page').find('.tests');
 		require(['stache!test'], function (test) {
-			$tests.append(test({id: $tests.find('.test').length}));
+			$tests.append(test({test: id++}));
 		});
 	});
 	$('.jExportJSON').click(function() {
@@ -133,14 +136,14 @@ require(['config'], function (config) {
 
 	function importObject(obj) {
 		$('#suite').val(obj.suite);
-		var pages = obj.pages.map(function(page, ind) {
+		var pages = obj.pages.map(function(page, id) {
 			return {
-				id: ind,
+				id: id,
 				target: page.target||'',
 				comment: page.comment||'',
 				tests: page.tests.map(function(test, ind) {
 					return {
-						ord: ind,
+						test: id+'_'+ind,
 						conditions: test.conditions.join('\n\n'),
 						procedures: test.procedures.join('\n\n'),
 						expected: test.expected
@@ -148,6 +151,7 @@ require(['config'], function (config) {
 				})||[]
 			}
 		});
+		id = pages.length;
 		require(['stache!page'], function (page) {
 			$pages.append(page(pages));
 		});
