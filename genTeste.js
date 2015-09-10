@@ -1,49 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="ISO-8859-1">
-	<title>Test Planner</title>
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-	<style>
-	.page::before{ counter-increment: page; content: "Pagina "counter(page)")"; font-weight: bold;}
-	.attr{display: table-row;}
-	.attr > * {display: table-cell;}
-	
-	.attr label {vertical-align: top; padding-right: .5em;}
-	body{counter-reset: page;}
-	.test {border-bottom: 3px double black;margin-bottom: .5em;}
-	.test > div {display: inline-block;}
-
-    .button-success,
-    .button-error,
-    .button-warning,
-    .button-secondary {color: white; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2)}
-    .button-success {background: rgb(28, 184, 65)}
-    .button-error {background: rgb(202, 60, 60);}
-    .button-warning {background: rgb(223, 117, 20)}
-    .button-secondary {background: rgb(66, 184, 221)}
-    .target { width: 100%}
-    .buttons { position: absolute; margin-top: 2em; margin-left: -3em;}
-	</style>
-</head>
-<body>
-	<h1>Test Planner</h1>
-	<div id="pages">
-		<label for="suite">Nome Suite:</label> <input type="text" id="suite">
-		<hr>
-	</div>
-	<button class="jAddpage pure-button pure-button-primary">Adicionar P&aacute;gina</button>
-	<a class="jExportHTML pure-button button-success">Exportar HTML</a>
-	<a class="jExportJSON pure-button">Exportar JSON</a>
-	<button class="jImportJSON pure-button button-warning">Importar JSON</button>
-	<button class="jClear pure-button button-error">Limpar</button>
-	<br/>
-	<input type="file" id="fileInput" accept="application/json" hidden>
-
-	<script src="bower_components/requirejs/require.js"></script>
-	<script src="gen/jquery-2.1.4.min.js"></script>
-	<script>
-require(['config'], function (config) {
+define( [
+	'stache!teste'
+], function (
+	templateTeste
+) {
 	var $pages = $('#pages');
 	var id = 1;
 	var templateHtml = null;
@@ -139,16 +98,10 @@ require(['config'], function (config) {
 	});
 
 	$('.jExportHTML').click(function() {
-		require(['stache!teste'], function(template) {
-			var suite = exportObject();
-			suite.pages.forEach(function(elem) {
-				var j = 1;
-				elem.tests.forEach(function(test){
-					test.index = j++;
-				});
-			})
-			window.open('', 'output').document.write(template(suite));
-		});
+		var suite = exportObject();
+		var blob = new Blob( [templateTeste(suite)], {type: 'text/html'} );
+		this.href = URL.createObjectURL(blob);
+		this.download = 'teste'+suite.suite+new Date().toISOString()+'.html';
 	});
 
 	$('.jExportJSON').click(function() {
@@ -251,7 +204,4 @@ require(['config'], function (config) {
 		window.sessionStorage['test'] = JSON.stringify(exportObject());
 		setTimeout(backupSaver, 1000);
 	}
-});
-	</script>
-</body>
-</html>
+} );
