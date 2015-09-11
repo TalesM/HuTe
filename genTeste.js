@@ -99,9 +99,8 @@ define( [
 
 	$('.jExportHTML').click(function() {
 		var suite = exportObject();
-		var blob = new Blob( [templateTeste(suite)], {type: 'text/html'} );
-		this.href = URL.createObjectURL(blob);
-		this.download = 'teste'+suite.suite+new Date().toISOString()+'.html';
+		var newWindow = window.open();
+		newWindow.document.body.innerHTML = (templateTeste(suite));
 	});
 
 	$('.jExportJSON').click(function() {
